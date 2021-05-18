@@ -1,1 +1,1 @@
-include ':app'
+include ':app',':xhttp2-lib'

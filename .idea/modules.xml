@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Begin.iml" filepath="$PROJECT_DIR$/.idea/modules/Begin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Begin.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Begin.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xhttp2-lib/Begin.xhttp2-lib.iml" filepath="$PROJECT_DIR$/.idea/modules/xhttp2-lib/Begin.xhttp2-lib.iml" />
     </modules>
   </component>
 </project>
