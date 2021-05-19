@@ -56,7 +56,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-    
+
         initView();
 
         mDBOpenHelper = new DBOpenHelper(this);
@@ -106,10 +106,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     if (inputcode.equals(realCode)) {
                         //将用户名和密码加入到数据库中
                         asyncRegister(username, password);
-                        Intent intent2 = new Intent(this, MainActivity.class);
-                        startActivity(intent2);
-                        finish();
-                        Toast.makeText(this,  "验证通过，注册成功", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(this, "验证码错误,注册失败", Toast.LENGTH_SHORT).show();
                     }
@@ -152,6 +148,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         @Override
                         public void onFailure(Call call, IOException e) {
                             Log.d(TAG, "onFailure: " + e.getMessage());
+                            showToastInThread(RegisterActivity.this, "服务器连接失败");
                         }
 
                         @Override
@@ -172,13 +169,17 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                     editor.putString("password", password); // 注意这里是password1
 
                                     if (editor.commit()) {
+                                        showToastInThread(RegisterActivity.this, "注册成功，正在跳转");
                                         Intent it_register_to_main = new Intent(RegisterActivity.this, MainActivity.class);
                                         startActivity(it_register_to_main);
                                         // 注册成功后，注册界面就没必要占据资源了
                                         finish();
+
                                     }
                                 } else {
+                                    Log.d(TAG, "用户存在");
                                     getResponseErrMsg(RegisterActivity.this, responseBodyJSONObject);
+                                    showToastInThread(RegisterActivity.this, "注册失败，用户已存在");
                                 }
                             } else {
                                 Log.d(TAG, "服务器异常");
@@ -210,12 +211,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     // 获取验证码响应data
     // 使用Gson解析response返回异常信息的JSON中的data对象
     private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
-        JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
-        String errorCode = dataObject.get("errorCode").getAsString();
-        String errorMsg = dataObject.get("errorMsg").getAsString();
-        Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
-        // 在子线程中显示Toast
-        showToastInThread(context, errorMsg);
+//        JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
+//        String errorCode = dataObject.get("errorCode").getAsString();
+//        String errorMsg = dataObject.get("errorMsg").getAsString();
+//        Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
+//        // 在子线程中显示Toast
+//        showToastInThread(context, errorMsg);
     }
 }
 
