@@ -132,41 +132,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    /*
-    private void asyncLoginWithXHttp2(String email, String password) {
-        XHttp.post(NetConstant.getLoginURL())
-                .params("email", email)
-                .params("password", password)
-                .params("type", "login")
-                .syncRequest(false)
-                .execute(new SimpleCallBack<Object>() {
-                    @Override
-                    public void onSuccess(Object obj) throws Throwable {
-                        Log.d(TAG, "请求URL成功,登录成功");
-                        String encryptedPassword = ValidUtils.encodeByMd5(password);
-                        sp = getSharedPreferences("login_info", MODE_PRIVATE);
-                        editor = sp.edit();
-                        editor.putString("email", email);
-                        editor.putString("encryptedPassword", encryptedPassword);
-
-                        if (editor.commit()) {
-                            Intent it_login_to_main = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(it_login_to_main);
-                            // 登录成功后，登录界面就没必要占据资源了
-                            finish();
-                        } else {
-                            showToastInThread(LoginActivity.this, "账号密码保存失败，请重新登录");
-                        }
-                    }
-
-                    @Override
-                    public void onError(ApiException e) {
-                        Log.d(TAG, "请求URL失败： " + e.getMessage());
-                        showToastInThread(LoginActivity.this, e.getMessage());
-                    }
-                });
-    }
-    */
     private void asyncLogin(final String email, final String password) {
         /*
          发送请求属于耗时操作，所以开辟子线程执行
@@ -225,7 +190,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 editor.putString("email", email);
                                 editor.putString("password", password);
                                 if (editor.commit()) {
-                                    Intent it_login_to_main = new Intent(LoginActivity.this, MainActivity.class);
+                                    Intent it_login_to_main = new Intent(LoginActivity.this, CourselistActivity.class);
                                     startActivity(it_login_to_main);
                                     // 登录成功后，登录界面就没必要占据资源了
                                     finish();

@@ -19,15 +19,6 @@
             app:layout_constraintVertical_bias="0.0" android:background="@android:color/holo_blue_dark">
 
     </RelativeLayout>
-    <ListView
-            android:layout_width="501dp"
-            android:layout_height="966dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.0"
-            android:id="@+id/lv_courselistactivity_course"
-            app:layout_constraintBottom_toTopOf="@+id/rl_courselistactivity_bottom"
-            app:layout_constraintTop_toBottomOf="@+id/rl_courselistactivity_top"/>
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -52,4 +43,11 @@
                 android:layout_alignParentRight="true" android:layout_marginRight="1dp"
                 android:layout_marginEnd="1dp" android:background="@android:color/holo_blue_dark"/>
     </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="496dp"
+            android:layout_height="963dp"
+            android:id="@+id/rv_CourselistActivity_list"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.349"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,11 +10,11 @@ public class NetConstant {
     private static final String getItemListURL    = "/item/list";
     private static final String submitOrderURL    = "/order/createorder";
 
-    private static final String getNewsListURL = "/news/list";
+    private static final String getCourseListURL = "/news/list";
 
-    private static final String getNewsByIdURL = "/news/detail/id?id=";
+    private static final String getCourseByIdURL = "/news/detail/id?id=";
 
-    private static final String getNewsByTitleURL = "/news/detail/title?title=";
+    private static final String getCourseByTitleURL = "/news/detail/title?title=";
 
     public static String getGetOtpCodeURL() {
         return getOtpCodeURL;
@@ -40,15 +40,15 @@ public class NetConstant {
         return submitOrderURL;
     }
 
-    public static String getNewsListURL() {
-        return getNewsListURL;
+    public static String getCourseListURL() {
+        return getCourseListURL;
     }
 
-    public static String getNewsByIdURL() {
-        return getNewsByIdURL;
+    public static String getCourseByIdURL() {
+        return getCourseByIdURL;
     }
 
-    public static String getNewsByTitleURL() {
-        return getNewsByTitleURL;
+    public static String getCourseByTitleURL() {
+        return getCourseByTitleURL;
     }
 }

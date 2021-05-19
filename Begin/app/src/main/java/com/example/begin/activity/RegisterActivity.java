@@ -170,7 +170,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                                     if (editor.commit()) {
                                         showToastInThread(RegisterActivity.this, "注册成功，正在跳转");
-                                        Intent it_register_to_main = new Intent(RegisterActivity.this, MainActivity.class);
+                                        Intent it_register_to_main = new Intent(RegisterActivity.this, CourselistActivity.class);
                                         startActivity(it_register_to_main);
                                         // 注册成功后，注册界面就没必要占据资源了
                                         finish();
