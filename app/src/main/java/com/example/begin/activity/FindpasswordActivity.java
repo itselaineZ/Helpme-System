@@ -13,10 +13,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.begin.R;
+import com.example.begin.activity.R;
 import com.example.begin.activity.DBOpenHelper;
 
-public class FindpasswordActivity extends AppCompatActivity implements View.OnClickListener {
+public class FindpasswordActivity extends BaseActivity implements View.OnClickListener {
 
     private DBOpenHelper mDBOpenHelper;
     private ImageView mIvFindpasswordactivityBack;
