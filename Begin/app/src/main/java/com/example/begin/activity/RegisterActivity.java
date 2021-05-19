@@ -16,14 +16,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.begin.activity.R;
-import com.example.begin.activity.DBOpenHelper;
+import com.example.begin.activity.Code;
 import com.example.begin.constant.NetConstant;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
-import java.time.Instant;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -33,53 +31,91 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CueActivity extends BaseActivity implements View.OnClickListener {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     // 声明SharedPreferences对象
     SharedPreferences sp;
     // 声明SharedPreferences编辑器对象
     SharedPreferences.Editor editor;
     // Log打印的通用Tag
-    private final String TAG = "LoginActivity";
+    private final String TAG = "RegisterActivity";
 
+    private String realCode;
     private DBOpenHelper mDBOpenHelper;
-    private EditText mEtCueavtivityUsername;
-    private EditText mEtCueactivityPassword;
-    private EditText mEtCueactivityReason;
-    private Button mBtCueactivitySubmit;
-    private ImageView mIvCueactivityBack;
+    private Button mBtRegisteractivityRegister;
+    private RelativeLayout mRlRegisteractivityTop;
+    private ImageView mIvRegisteractivityBack;
+    private LinearLayout mLlRegisteractivityBody;
+    private EditText mEtRegisteractivityUsername;
+    private EditText mEtRegisteractivityPassword1;
+    private EditText mEtRegisteractivityPassword2;
+    private EditText mEtRegisteractivityInputcodes;
+    private ImageView mIvRegisteractivityShowcode;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cue);
-
+        setContentView(R.layout.activity_register);
+    
         initView();
 
         mDBOpenHelper = new DBOpenHelper(this);
+
+        //将验证码用图片的形式显示出来
+        mIvRegisteractivityShowcode.setImageBitmap(Code.getInstance().createBitmap());
+        realCode = Code.getInstance().getCode().toLowerCase();
     }
 
     private void initView(){
-        mEtCueavtivityUsername = findViewById(R.id.et_cueactivity_username);
-        mEtCueactivityPassword = findViewById(R.id.et_cueactivity_password);
-        mBtCueactivitySubmit = findViewById(R.id.bt_cueactivity_submit);
-        mIvCueactivityBack = findViewById(R.id.iv_cueactivity_back);
+        mBtRegisteractivityRegister = findViewById(R.id.bt_registeractivity_register);
+        mRlRegisteractivityTop = findViewById(R.id.rl_registeractivity_top);
+        mIvRegisteractivityBack = findViewById(R.id.iv_registeractivity_back);
+        mLlRegisteractivityBody = findViewById(R.id.ll_registeractivity_body);
+        mEtRegisteractivityUsername = findViewById(R.id.et_registeractivity_username);
+        mEtRegisteractivityPassword1 = findViewById(R.id.et_registeractivity_password1);
+        mEtRegisteractivityPassword2 = findViewById(R.id.et_registeractivity_password2);
+        mEtRegisteractivityInputcodes = findViewById(R.id.et_registeractivity_inputcodes);
+        mIvRegisteractivityShowcode = findViewById(R.id.iv_registeractivity_showcode);
 
-        mBtCueactivitySubmit.setOnClickListener(this);
-        mIvCueactivityBack.setOnClickListener(this);
+        mIvRegisteractivityBack.setOnClickListener(this);
+        mIvRegisteractivityShowcode.setOnClickListener(this);
+        mBtRegisteractivityRegister.setOnClickListener(this);
     }
 
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.bt_cueactivity_submit:
-                String username = mEtCueavtivityUsername.getText().toString().trim();
-                String password = mEtCueactivityPassword.getText().toString().trim();
-                String reason = mEtCueactivityReason.getText().toString().trim();
-                asyncCue(username, password, reason);
-                break;
-            case R.id.iv_cueactivity_back:
-                startActivity(new Intent(this, LoginActivity.class));
+        switch (view.getId()) {
+            case R.id.iv_registeractivity_back: //返回登录页面
+                Intent intent1 = new Intent(this, LoginActivity.class);
+                startActivity(intent1);
                 finish();
+                break;
+            case R.id.iv_registeractivity_showcode:    //改变随机验证码的生成
+                mIvRegisteractivityShowcode.setImageBitmap(Code.getInstance().createBitmap());
+                realCode = Code.getInstance().getCode().toLowerCase();
+                break;
+            case R.id.bt_registeractivity_register:    //注册按钮
+                //获取用户输入的用户名、密码、验证码
+                String username = mEtRegisteractivityUsername.getText().toString().trim();
+                String password1 = mEtRegisteractivityPassword1.getText().toString().trim();
+                String password2 = mEtRegisteractivityPassword2.getText().toString().trim();
+                //需要实现两次密码是否相同的比较，此处暂时未实现
+                String password = password1;
+                String inputcode = mEtRegisteractivityInputcodes.getText().toString().toLowerCase();
+                //注册验证
+                if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(inputcode) ) {
+                    if (inputcode.equals(realCode)) {
+                        //将用户名和密码加入到数据库中
+                        asyncRegister(username, password);
+                        Intent intent2 = new Intent(this, MainActivity.class);
+                        startActivity(intent2);
+                        finish();
+                        Toast.makeText(this,  "验证通过，注册成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "验证码错误,注册失败", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(this, "未完善信息，注册失败", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -87,10 +123,10 @@ public class CueActivity extends BaseActivity implements View.OnClickListener {
     // okhttp异步请求进行注册
     // 参数统一传递字符串
     // 传递到后端再进行类型转换以适配数据库
-    private void asyncCue(final String email, final String password, final String reason) {
+    private void asyncRegister(final String email, final String password) {
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "存在输入为空，注册失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "存在输入为空，注册失败", Toast.LENGTH_SHORT).show();
         } else {
             // 发送请求属于耗时操作，开辟子线程
             new Thread(new Runnable() {
@@ -104,7 +140,6 @@ public class CueActivity extends BaseActivity implements View.OnClickListener {
                     RequestBody requestBody = new FormBody.Builder()
                             .add("email", email)
                             .add("password", password)
-                            .add("reason", reason)
                             .build();
                     // 3、发送请求，特别强调这里是POST方式
                     Request request = new Request.Builder()
@@ -137,17 +172,17 @@ public class CueActivity extends BaseActivity implements View.OnClickListener {
                                     editor.putString("password", password); // 注意这里是password1
 
                                     if (editor.commit()) {
-                                        Intent it_register_to_main = new Intent(CueActivity.this, MainActivity.class);
+                                        Intent it_register_to_main = new Intent(RegisterActivity.this, MainActivity.class);
                                         startActivity(it_register_to_main);
                                         // 注册成功后，注册界面就没必要占据资源了
                                         finish();
                                     }
                                 } else {
-                                    getResponseErrMsg(CueActivity.this, responseBodyJSONObject);
+                                    getResponseErrMsg(RegisterActivity.this, responseBodyJSONObject);
                                 }
                             } else {
                                 Log.d(TAG, "服务器异常");
-                                showToastInThread(CueActivity.this, responseStr);
+                                showToastInThread(RegisterActivity.this, responseStr);
                             }
                         }
                     });
@@ -183,3 +218,4 @@ public class CueActivity extends BaseActivity implements View.OnClickListener {
         showToastInThread(context, errorMsg);
     }
 }
+
