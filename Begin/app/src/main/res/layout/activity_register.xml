@@ -7,142 +7,138 @@
     android:background="#FBFBFB"
     tools:context="com.example.justloginregistertest.RegisterActivity">
 
-    <RelativeLayout
-        android:id="@+id/rl_registeractivity_top"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@android:color/holo_blue_dark">
+    <ImageView
+            android:src="@drawable/firstbackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/iv_registeractivity_bg"/>
 
-        <ImageView
+    <ImageView
             android:id="@+id/iv_registeractivity_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="28dp"
             android:background="@drawable/ic_left_back"
             android:clickable="true"
-            android:onClick="onClick" />
-
-    </RelativeLayout>
-
+            android:onClick="onClick" android:layout_alignParentStart="true"
+            android:layout_marginTop="28dp" android:layout_alignParentTop="true"/>
     <LinearLayout
-        android:id="@+id/ll_registeractivity_body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_registeractivity_top"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:orientation="vertical">
+            android:id="@+id/ll_registeractivity_body"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical" android:layout_alignParentBottom="true" android:layout_marginBottom="276dp"
+            android:layout_alignParentStart="true" android:layout_marginStart="14dp" android:layout_marginTop="243dp"
+            android:layout_alignParentTop="true" android:layout_alignParentEnd="true" android:layout_marginEnd="11dp">
         <!-- 第一个文本编辑框  输入用户名 -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_cueactivity_username"
-                android:layout_width="57dp"
-                android:layout_height="wrap_content"
-                android:text="邮    箱：" />
-
-            <EditText
-                android:id="@+id/et_registeractivity_username"
-                android:layout_width="335dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:hint="请输入邮箱" />
-        </LinearLayout>
-        <!-- 第二个文本编辑框  输入密码 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_cueactivity_password1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="密    码：" />
-
-            <EditText
-                android:id="@+id/et_registeractivity_password1"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:hint="请输入密码"
-                android:inputType="textPassword" />
-        </LinearLayout>
-        <!-- 第三个文本编辑框  再次输入密码 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_registeractivity_password2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="密    码：" />
-
-            <EditText
-                android:id="@+id/et_registeractivity_password2"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:hint="请再次输入密码"
-                android:inputType="textPassword" />
-        </LinearLayout>
-        <!-- 验证码部分 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
-            <!-- 第四个文本编辑框  输入验证码 -->
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/tv_registeractivity_codes"
+
+            <TextView
+                    android:id="@+id/tv_cueactivity_username"
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:text="邮    箱：" android:textColor="#FFFFFF"/>
+
+            <EditText
+                    android:id="@+id/et_registeractivity_username"
+                    android:layout_width="309dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:hint="请输入邮箱" android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
+        </LinearLayout>
+        <!-- 第二个文本编辑框  输入密码 -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tv_cueactivity_password1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="验证码："/>
-                <EditText
-                    android:id="@+id/et_registeractivity_inputcodes"
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
+                    android:text="密    码：" android:textColor="#FFFFFF"/>
+
+            <EditText
+                    android:id="@+id/et_registeractivity_password1"
+                    android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:hint="请输入4位验证码" />
+                    android:gravity="center_vertical"
+                    android:hint="请输入密码"
+                    android:inputType="textPassword" android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
+        </LinearLayout>
+        <!-- 第三个文本编辑框  再次输入密码 -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tv_registeractivity_password2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="密    码：" android:textColor="#FFFFFF"/>
+
+            <EditText
+                    android:id="@+id/et_registeractivity_password2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:hint="请再次输入密码"
+                    android:inputType="textPassword" android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
+        </LinearLayout>
+        <!-- 验证码部分 -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+            <!-- 第四个文本编辑框  输入验证码 -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                <TextView
+                        android:id="@+id/tv_registeractivity_codes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="验证码：" android:textColor="#FFFFFF"/>
+                <EditText
+                        android:id="@+id/et_registeractivity_inputcodes"
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="请输入4位验证码" android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
 
                 <ImageView
-                    android:id="@+id/iv_registeractivity_showcode"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="-10dp"
-                    android:layout_weight="1.5"
-                    android:clickable="true"
-                    android:onClick="onClick" />
+                        android:id="@+id/iv_registeractivity_showcode"
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="-10dp"
+                        android:layout_weight="1.5"
+                        android:clickable="true"
+                        android:onClick="onClick"/>
             </LinearLayout>
         </LinearLayout>
         <!-- 注册按钮 -->
         <Button
-            android:id="@+id/bt_registeractivity_register"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="40dp"
-            android:background="@android:color/holo_blue_dark"
-            android:onClick="onClick"
-            android:text="注册"
-            android:textColor="#fff" />
+                android:id="@+id/bt_registeractivity_register"
+                android:layout_width="354dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="40dp"
+                android:background="#DBA103"
+                android:onClick="onClick"
+                android:text="注册"
+                android:textColor="#fff"/>
 
     </LinearLayout>
 

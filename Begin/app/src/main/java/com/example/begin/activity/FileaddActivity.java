@@ -4,128 +4,37 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import androidx.databinding.DataBindingUtil;
-
+import com.example.begin.constant.NetConstant;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.xuexiang.xhttp2.XHttp;
-import com.xuexiang.xhttp2.callback.SimpleCallBack;
-import com.xuexiang.xhttp2.exception.ApiException;
+import okhttp3.*;
 
 import java.io.IOException;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.begin.activity.Code;
-import com.example.begin.constant.NetConstant;
-import com.example.begin.util.ValidUtils;
-import com.xuexiang.xhttp2.XHttp;
-import com.xuexiang.xhttp2.callback.SimpleCallBack;
-
-import java.util.ArrayList;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class FileaddActivity extends BaseActivity implements View.OnClickListener{
 
     // 声明SharedPreferences对象
     SharedPreferences sp;
     // 声明SharedPreferences编辑器对象
     SharedPreferences.Editor editor;
     // Log打印的通用Tag
-    private final String TAG = "LoginActivity";
-
-    private String realCode;
-    private Button mBtLoginactivityLogin;
-    private Button mBtLoginactivityRegister;
-    private Button mBtLoginactivityCue;
-    private Button mbtLoginactivityFindpassword;
-    private EditText mEtLoginactivityUsername;
-    private EditText mEtLoginactivityPassword;
-    private EditText mEtLoginactivityInputcodes;
-    private ImageView mIvLoginactivityShowcode;
+    private final String TAG = "FileaddActivity";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        //setContentView(R.layout.activity_fileadd);
+        //initView();
 
-        initView();
-
-        //将验证码用图片的形式显示出来
-        mIvLoginactivityShowcode.setImageBitmap(Code.getInstance().createBitmap());
-        realCode = Code.getInstance().getCode().toLowerCase();
     }
 
-    private void initView() {
-        // 初始化控件
-        mBtLoginactivityLogin = findViewById(R.id.bt_loginactivity_login);
-        mBtLoginactivityRegister = findViewById(R.id.bt_loginactivity_register);
-        mBtLoginactivityCue = findViewById(R.id.bt_loginactivity_cue);
-        mbtLoginactivityFindpassword = findViewById(R.id.bt_loginactivity_findpassword);
-        mEtLoginactivityUsername = findViewById(R.id.et_loginactivity_username);
-        mEtLoginactivityPassword = findViewById(R.id.et_loginactivity_password);
-        mEtLoginactivityInputcodes = findViewById(R.id.et_loginactivity_inputcodes);
-        mIvLoginactivityShowcode = findViewById(R.id.iv_loginactivity_Showcodes);
+    public void onClick(View view){
+        //switch (view.getId()){
+            //case R.id.bt_fileaddactivitty_submit:
 
-        // 设置点击事件监听器
-        mBtLoginactivityLogin.setOnClickListener(this);
-        mBtLoginactivityRegister.setOnClickListener(this);
-        mbtLoginactivityFindpassword.setOnClickListener(this);
-        mBtLoginactivityCue.setOnClickListener(this);
-        mIvLoginactivityShowcode.setOnClickListener(this);
-    }
-
-    public void onClick(View view) {
-        switch (view.getId()) {
-            // 跳转到注册界面
-            case R.id.bt_loginactivity_register:
-                startActivity(new Intent(this, RegisterActivity.class));
-                finish();
-                break;
-
-            case R.id.bt_loginactivity_login:
-                String name = mEtLoginactivityUsername.getText().toString().trim();
-                String password = mEtLoginactivityPassword.getText().toString().trim();
-                String inputcode = mEtLoginactivityInputcodes.getText().toString().toLowerCase();
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password))
-                    Toast.makeText(this, "请输入你的用户名或密码", Toast.LENGTH_SHORT).show();
-                else if (inputcode.equals(realCode) == false)
-                    Toast.makeText(this, "验证码错误，请重新输入", Toast.LENGTH_SHORT).show();
-                else if (!(ValidUtils.isEmailValid(name) && ValidUtils.isPasswordValid(password))) {
-                    Toast.makeText(this, "账号或密码错误", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                else asyncLogin(name, password);
-                break;
-            case R.id.bt_loginactivity_cue:
-                startActivity(new Intent(this, CueActivity.class));
-                finish();
-                break;
-            case R.id.bt_loginactivity_findpassword:
-                startActivity(new Intent(this, FindpasswordActivity.class));
-                finish();
-                break;
-            case R.id.iv_loginactivity_Showcodes:
-                mIvLoginactivityShowcode.setImageBitmap(Code.getInstance().createBitmap());
-                realCode = Code.getInstance().getCode().toLowerCase();
-                break;
-        }
+        //}
     }
 
     private void asyncLogin(final String email, final String password) {
@@ -155,7 +64,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onFailure(Call call, IOException e) {
                         Log.d(TAG, "请求URL失败： " + e.getMessage());
-                        showToastInThread(LoginActivity.this, "请求URL失败, 请重试！");
+                        //showToastInThread(LoginActivity.this, "请求URL失败, 请重试！");
                     }
 
                     @Override
@@ -186,20 +95,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 editor.putString("email", email);
                                 editor.putString("password", password);
                                 if (editor.commit()) {
-                                    Intent it_login_to_main = new Intent(LoginActivity.this, CourselistActivity.class);
-                                    startActivity(it_login_to_main);
+                                    //Intent it_login_to_main = new Intent(LoginActivity.this, CourselistActivity.class);
+                                    //startActivity(it_login_to_main);
                                     // 登录成功后，登录界面就没必要占据资源了
                                     finish();
                                 } else {
-                                    showToastInThread(LoginActivity.this, "token保存失败，请重新登录");
+                                    //showToastInThread(LoginActivity.this, "token保存失败，请重新登录");
                                 }
                             } else {
-                                getResponseErrMsg(LoginActivity.this, responseBodyJSONObject);
+                                //getResponseErrMsg(LoginActivity.this, responseBodyJSONObject);
                                 Log.d(TAG, "账号或密码验证失败");
                             }
                         } else {
                             Log.d(TAG, "服务器异常");
-                            showToastInThread(LoginActivity.this, responseStr);
+                            //showToastInThread(LoginActivity.this, responseStr);
                         }
                     }
                 });

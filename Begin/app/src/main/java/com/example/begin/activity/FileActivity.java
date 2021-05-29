@@ -32,7 +32,8 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
     private ImageButton mIbFileActivityTaskBt;
     private ImageButton mIbFileActivityUserBt;
     private List<Filesource> fileList = new ArrayList<>();
-    private static final String TAG = "FilelistActivity";
+    private static final String TAG = "FileActivity";
+    private ImageButton mIbFileActivityAddfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,6 +47,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
         mIbFileActivityTaskBt = findViewById(R.id.ib_fileactivity_taskbt);
         mIbFileActivityUserBt = findViewById(R.id.ib_fileactivity_userbt);
         rvList = findViewById(R.id.rv_fileactivity_list);
+        //mIbFileActivityAddfile = findViewById(R.id.ib_fileactivity_addfile);
 
         //布局管理
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -72,6 +74,11 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
                 //startActivity(new Intent(this, UsersetActivity.class));
                 finish();
                 break;
+            //case R.id_ib_fileactivity_addfile:
+                //startActivity(new Intent(this, FileaddActivity.class));
+                //finish();
+               // break;
+
         }
     }
 

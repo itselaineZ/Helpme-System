@@ -5,103 +5,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="397dp"
-        android:layout_height="43dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.127">
-
-        <TextView
-            android:id="@+id/tv_cueactivity_password1"
+    <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="密    码：" />
+            android:layout_height="wrap_content" app:srcCompat="@drawable/firstbackground"
+            android:id="@+id/iv_cueactivity_bg"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
 
-        <EditText
-            android:id="@+id/et_cueactivity_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="请输入密码" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="400dp"
-        android:layout_height="47dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.191">
-
-        <TextView
-            android:id="@+id/tv_cueactivity_username"
-            android:layout_width="57dp"
-            android:layout_height="wrap_content"
-            android:text="邮    箱：" />
-
-        <EditText
-            android:id="@+id/et_cueactivity_username"
-            android:layout_width="325dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="请输入邮箱" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_registeractivity_top"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@android:color/holo_blue_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <ImageView
+    <ImageView
             android:id="@+id/iv_cueactivity_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
-            app:srcCompat="@drawable/ic_left_back" />
-    </RelativeLayout>
+            app:srcCompat="@drawable/ic_left_back"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="28dp" android:layout_marginStart="28dp"/>
+    <LinearLayout
+            android:layout_width="363dp"
+            android:layout_height="49dp"
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp">
 
+        <TextView
+                android:id="@+id/tv_cueactivity_password1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密    码：" tools:layout_editor_absoluteY="286dp" tools:layout_editor_absoluteX="29dp"
+                android:textColor="#FFFFFF"/>
+
+        <EditText
+                android:id="@+id/et_cueactivity_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="请输入密码" tools:layout_editor_absoluteY="272dp" tools:layout_editor_absoluteX="85dp"
+                android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="361dp"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="@+id/iv_cueactivity_bg"
+            android:id="@+id/linearLayout2"
+            android:layout_marginTop="200dp"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+                android:id="@+id/tv_cueactivity_username"
+                android:layout_width="57dp"
+                android:layout_height="wrap_content"
+                android:text="邮    箱：" tools:layout_editor_absoluteY="335dp" tools:layout_editor_absoluteX="29dp"
+                android:textColor="#FFFFFF"/>
+
+        <EditText
+                android:id="@+id/et_cueactivity_username"
+                android:layout_width="325dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="请输入邮箱" tools:layout_editor_absoluteY="321dp" tools:layout_editor_absoluteX="86dp"
+                android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
+    </LinearLayout>
     <Button
-        android:id="@+id/bt_cueactivity_submit"
-        android:layout_width="385dp"
-        android:layout_height="59dp"
-        android:layout_marginBottom="28dp"
-        android:background="@android:color/holo_blue_dark"
-        android:text="提交申诉"
-        android:textColor="#FDFDFD"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+            android:id="@+id/bt_cueactivity_submit"
+            android:layout_width="351dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="48dp"
+            android:background="#DBA103"
+            android:text="提交申诉"
+            android:textColor="#FDFDFD"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/met_cueactivity_reason"
+            app:layout_constraintVertical_bias="0.441"/>
     <EditText
-        android:id="@+id/met_cueactivity_reason"
-        android:layout_width="363dp"
-        android:layout_height="430dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="请输入申诉理由（不超过80字）"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.637" />
+            android:id="@+id/met_cueactivity_reason"
+            android:layout_width="353dp"
+            android:layout_height="331dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="请输入申诉理由（不超过80字）"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" android:layout_marginTop="28dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

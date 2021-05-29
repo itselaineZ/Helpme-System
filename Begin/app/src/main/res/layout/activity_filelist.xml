@@ -4,47 +4,38 @@
                                                    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
 
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="1.0"
-            android:background="@android:color/holo_blue_dark" android:id="@+id/rl_courselistactivity_bottom">
-        <ImageButton
-                android:layout_width="137dp"
-                android:layout_height="match_parent" app:srcCompat="@android:drawable/ic_dialog_dialer"
-                android:id="@+id/ib_fileactivity_coursebt" android:background="@android:color/holo_blue_dark"/>
-        <ImageButton
-                android:layout_width="137dp"
-                android:layout_height="match_parent" app:srcCompat="@android:drawable/ic_menu_sort_by_size"
-                android:id="@+id/ib_fileactivity_taskbt"
-                android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
-                android:layout_marginRight="137dp" android:layout_marginEnd="137dp"
-                android:background="@android:color/holo_blue_dark"/>
-        <ImageButton
-                android:layout_width="137dp"
-                android:layout_height="match_parent" app:srcCompat="@android:drawable/ic_menu_my_calendar"
-                android:background="@android:color/holo_blue_dark"
-                android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
-                android:layout_marginRight="1dp" android:layout_marginEnd="1dp"
-                android:id="@+id/ib_fileactivity_userbt"/>
-    </RelativeLayout>
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:visibility="visible"
-            android:id="@+id/rl_courselistactivity_top" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0" android:background="@android:color/holo_blue_dark">
-
-    </RelativeLayout>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/mainbackground" android:id="@+id/iv_fileactivity_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+    />
     <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="407dp"
-            android:layout_height="610dp"
+            android:layout_width="393dp"
+            android:layout_height="712dp"
             android:id="@+id/rv_fileactivity_list"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" tools:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="40dp"/>
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/ib_fileactivity_taskbt"/>
+    <ImageButton
+            android:layout_width="130dp"
+            android:layout_height="120dp" app:srcCompat="@drawable/course"
+            android:id="@+id/ib_fileactivity_coursebt" android:background="#000099CC"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageButton
+            android:layout_width="130dp"
+            android:layout_height="120dp" app:srcCompat="@drawable/task"
+            android:id="@+id/ib_fileactivity_taskbt"
+            android:background="#000099CC"
+            app:layout_constraintStart_toEndOf="@+id/ib_fileactivity_coursebt"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageButton
+            android:layout_width="130dp"
+            android:layout_height="120dp" app:srcCompat="@drawable/setting"
+            android:background="#000099CC"
+            android:id="@+id/ib_fileactivity_userbt"
+            app:layout_constraintStart_toEndOf="@+id/ib_fileactivity_taskbt"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
