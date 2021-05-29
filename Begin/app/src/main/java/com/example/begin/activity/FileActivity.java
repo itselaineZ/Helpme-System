@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
@@ -31,6 +32,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
     private static FileSearchAdapter searchAdapter;
     private ImageButton mIbFileActivityTaskBt;
     private ImageButton mIbFileActivityUserBt;
+    private ImageView mIvFileActivityAddfileBt;
     private List<Filesource> fileList = new ArrayList<>();
     private static final String TAG = "FileActivity";
     private ImageButton mIbFileActivityAddfile;
@@ -46,8 +48,8 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
     private void initView(){
         mIbFileActivityTaskBt = findViewById(R.id.ib_fileactivity_taskbt);
         mIbFileActivityUserBt = findViewById(R.id.ib_fileactivity_userbt);
+        mIvFileActivityAddfileBt = findViewById(R.id.iv_fileactivity_addfile);
         rvList = findViewById(R.id.rv_fileactivity_list);
-        //mIbFileActivityAddfile = findViewById(R.id.ib_fileactivity_addfile);
 
         //布局管理
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -74,10 +76,10 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
                 //startActivity(new Intent(this, UsersetActivity.class));
                 finish();
                 break;
-            //case R.id_ib_fileactivity_addfile:
+            case R.id.iv_fileactivity_addfile:
                 //startActivity(new Intent(this, FileaddActivity.class));
-                //finish();
-               // break;
+                finish();
+                break;
 
         }
     }

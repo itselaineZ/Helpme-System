@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +35,7 @@ public class CourselistActivity extends BaseActivity implements View.OnClickList
     private static CourseSearchAdapter searchAdapter;
     private ImageButton mIbCourselistActivityTaskBt;
     private ImageButton mIbCourselistActivityUserBt;
+    private ImageView mIvCourselistActivityAddcourseBt;
     private List<Course> courseList = new ArrayList<>();
     private static final String TAG = "CourselistActivity";
 
@@ -48,6 +50,7 @@ public class CourselistActivity extends BaseActivity implements View.OnClickList
     private void initView(){
         mIbCourselistActivityTaskBt = findViewById(R.id.ib_courseactivity_taskbt);
         mIbCourselistActivityUserBt = findViewById(R.id.ib_courselistactivity_userbt);
+        mIvCourselistActivityAddcourseBt = findViewById(R.id.iv_courseactivity_addcourse);
         rvList = findViewById(R.id.rv_CourselistActivity_list);
 
         //布局管理
@@ -84,6 +87,10 @@ public class CourselistActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.ib_courselistactivity_userbt:
                 //startActivity(new Intent(this, UsersetActivity.class));
+                finish();
+                break;
+            case R.id.iv_courseactivity_addcourse:
+                //startActivity(new Intent(this, CourseaddActivity.class));
                 finish();
                 break;
         }
