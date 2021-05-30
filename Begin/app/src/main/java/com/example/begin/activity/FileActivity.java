@@ -17,9 +17,7 @@ import com.example.begin.constant.NetConstant;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,11 +34,16 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
     private List<Filesource> fileList = new ArrayList<>();
     private static final String TAG = "FileActivity";
     private ImageButton mIbFileActivityAddfile;
+    public static String courseName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filelist);
+
+        Bundle bundle = this.getIntent().getExtras();
+        courseName = bundle.getString("courseName");
+
         initView();
 
     }
@@ -101,9 +104,16 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
             String url = strings[0];
             List<Filesource> fileList = null;
             OkHttpClient client = new OkHttpClient();
+
+            RequestBody requestBody = new FormBody.Builder()
+                    .add("CourseName", courseName)
+                    .build();
+
             Request request = new Request.Builder()
                     .url(url)
+                    .post(requestBody)
                     .build();
+
             Response response = null;
             try {
                 response = client.newCall(request).execute();

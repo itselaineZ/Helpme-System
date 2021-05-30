@@ -52,7 +52,7 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    private void asyncCourse(final String coursename, final String courseid) {
+    private void asyncCourse(final String courseName, final String courseID) {
         /*
          发送请求属于耗时操作，所以开辟子线程执行
          上面的参数都加上了final，否则无法传递到子线程中
@@ -65,8 +65,8 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
                 OkHttpClient okHttpClient = new OkHttpClient();
                 // 2、构建请求体requestBody
                 RequestBody requestBody = new FormBody.Builder()
-                        .add("name", coursename)
-                        .add("no", courseid)
+                        .add("name", courseName)
+                        .add("no", courseID)
                         .build();
                 // 3、发送请求，因为要传密码，所以用POST方式
                 Request request = new Request.Builder()
@@ -107,8 +107,8 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
                                 sp = getSharedPreferences("course_info", MODE_PRIVATE);
                                 editor = sp.edit();
                                 editor.putString("token", "token_value");
-                                editor.putString("name", coursename);
-                                editor.putString("no", courseid);
+                                editor.putString("name", courseName);
+                                editor.putString("no", courseID);
                                 if (editor.commit()) {
                                     startActivity(new Intent(CourseaddActivity.this, FileActivity.class));
                                     finish();

@@ -1,6 +1,7 @@
 package com.example.begin.adapter;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class FileSearchAdapter extends RecyclerView.Adapter<FileSearchAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Filesource file = fileList.get(position);
 
+        String coursename = file.getCoursename();
         String filename = file.getFilename();
         double filescore = file.getScore();
         int filedownloads = file.getDownloads();
@@ -69,8 +71,11 @@ public class FileSearchAdapter extends RecyclerView.Adapter<FileSearchAdapter.My
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(v.getContext(), FileDetialActivity.class);
-                //intent.putExtra("file", file);
+                Bundle bundle = new Bundle();
+                bundle.putString("courseName", coursename);
+                bundle.putString("fileName", filename);
+                //Intent intent = new Intent(v.getContext(), FiledetialActivity.class);
+                //intent.putExtra(bundle);
                 //v.getContext().startActivity(intent);
             }
         });

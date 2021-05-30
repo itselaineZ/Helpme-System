@@ -52,15 +52,15 @@ public class CourseSearchAdapter extends RecyclerView.Adapter<CourseSearchAdapte
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Course course = courseList.get(position);
 
-        String coursename = course.getCoursename();
+        String courseName = course.getCoursename();
         // 设置 课程名
-        holder.mTvCoursename.setText(coursename);
+        holder.mTvCoursename.setText(courseName);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FileActivity.class);
-                intent.putExtra("course", course);
+                intent.putExtra("courseName", courseName);
                 v.getContext().startActivity(intent);
             }
         });

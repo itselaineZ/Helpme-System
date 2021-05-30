@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Filesource implements Serializable{
     private long id;
+    private String coursename;
     private String filename;
     private String path;
     private double score;
@@ -13,6 +14,10 @@ public class Filesource implements Serializable{
     public long getId(){return id;}
 
     public void setId(long id){this.id = id;}
+
+    public String getCoursename(){return coursename;}
+
+    public void setCoursename(String filename){this.coursename = coursename;}
 
     public String getFilename(){return filename;}
 
