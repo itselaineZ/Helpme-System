@@ -180,9 +180,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                              这里的telphone和password每次都要重写的
                              否则无法实现修改密码
                             */
+                                final String token = getToken(responseBodyJSONObject);
                                 sp = getSharedPreferences("login_info", MODE_PRIVATE);
                                 editor = sp.edit();
-                                editor.putString("token", "token_value");
+                                editor.putString("token", token);
                                 editor.putString("email", email);
                                 editor.putString("password", password);
                                 if (editor.commit()) {
@@ -207,7 +208,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         }).start();
     }
-
     /*
       使用Gson解析response的JSON数据
       本来总共是有三步的，一、二步在方法调用之前执行了
@@ -219,6 +219,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         // 登录成功返回的json为{ "status":"success", "data":null }
         // 只获取status即可，data为null
         return status;
+    }
+
+    private final String getToken(JsonObject responseBodyJSONObject) {
+        String token = responseBodyJSONObject.get("token").getAsString();
+        return token;
     }
 
     /*

@@ -28,7 +28,6 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
 
         Bundle bundle = this.getIntent().getExtras();
         fileName = bundle.getString("fileName");
-        courseName = bundle.getString("courseName");
 
         initView();
     }

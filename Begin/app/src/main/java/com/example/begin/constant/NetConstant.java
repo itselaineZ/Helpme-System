@@ -1,7 +1,9 @@
 package com.example.begin.constant;
 
 public class NetConstant {
-    public static final String baseService = "http://address:8080";
+    public static final String baseService = "http://106.14.124.235:3000/mock/9";
+
+    private static final String userURL = "/user";
 
     private static final String getOtpCodeURL     = "/user/getOtp";
     private static final String loginURL          = "/login";
@@ -10,7 +12,9 @@ public class NetConstant {
     private static final String getItemListURL    = "/item/list";
     private static final String submitOrderURL    = "/order/createorder";
 
-    private static final String getCourseListURL = "/news/list";
+    private static final String CourseListURL = "/course/list";
+
+    private static final String FileListURL = "/course/material";
 
     private static final String getCourseByIdURL = "/news/detail/id?id=";
 
@@ -21,11 +25,11 @@ public class NetConstant {
     }
 
     public static String getLoginURL() {
-        return baseService + loginURL;
+        return baseService + userURL +loginURL;
     }
 
     public static String getRegisterURL() {
-        return baseService + registerURL;
+        return baseService + userURL + registerURL;
     }
 
     public static String getCreateItemURL() {
@@ -41,7 +45,11 @@ public class NetConstant {
     }
 
     public static String getCourseListURL() {
-        return getCourseListURL;
+        return baseService + CourseListURL;
+    }
+
+    public static String getFileListURL() {
+        return baseService + FileListURL;
     }
 
     public static String getCourseByIdURL() {

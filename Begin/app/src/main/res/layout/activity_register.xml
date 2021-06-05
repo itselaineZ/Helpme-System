@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FBFBFB"
-    tools:context="com.example.justloginregistertest.RegisterActivity">
-
-    <ImageView
-            android:src="@drawable/firstbackground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/iv_registeractivity_bg"/>
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/firstbackground"
+                >
 
     <ImageView
             android:id="@+id/iv_registeractivity_back"

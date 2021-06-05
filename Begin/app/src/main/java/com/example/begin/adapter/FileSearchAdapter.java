@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import com.example.begin.activity.FileActivity;
+import com.example.begin.activity.FiledetailActivity;
 import com.example.begin.activity.R;
 import com.example.begin.bean.Course;
 import com.example.begin.bean.Filesource;
@@ -26,7 +27,7 @@ public class FileSearchAdapter extends RecyclerView.Adapter<FileSearchAdapter.My
     private List<Filesource> fileList;
 
     //接收参数
-    public FileSearchAdapter(List<Filesource> courseList){
+    public FileSearchAdapter(List<Filesource> fileList){
         this.fileList = fileList;
     }
 
@@ -58,25 +59,23 @@ public class FileSearchAdapter extends RecyclerView.Adapter<FileSearchAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Filesource file = fileList.get(position);
 
-        String coursename = file.getCoursename();
-        String filename = file.getFilename();
+        String filename = file.getCourseMaterialName();
         double filescore = file.getScore();
         int filedownloads = file.getDownloads();
         // 设置 课程名
         holder.mTvFilename.setText(filename);
         holder.mTvFilescore.setText(String.valueOf(filescore));//转成字符串才能放进TextView
-        holder.mTvFiledownloads.setText(filedownloads);
+        holder.mTvFiledownloads.setText(String.valueOf(filedownloads));
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("courseName", coursename);
                 bundle.putString("fileName", filename);
-                //Intent intent = new Intent(v.getContext(), FiledetialActivity.class);
-                //intent.putExtra(bundle);
-                //v.getContext().startActivity(intent);
+                Intent intent = new Intent(v.getContext(), FiledetailActivity.class);
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
             }
         });
     }

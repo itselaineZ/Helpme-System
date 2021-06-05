@@ -1,6 +1,7 @@
 package com.example.begin.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,6 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileActivity extends BaseActivity implements View.OnClickListener{
+
+    // 声明SharedPreferences对象
+    SharedPreferences sp;
 
     private static RecyclerView rvList;
     private static FileSearchAdapter searchAdapter;
@@ -61,7 +65,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
         setAdapter(fileList);
 
         //获取数据
-        String url = NetConstant.getCourseListURL();
+        String url = NetConstant.getFileListURL();
         FileActivity.MyAsyncTask task = new FileActivity.MyAsyncTask();
         task.execute(url);
 
@@ -87,7 +91,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
-    private static void setAdapter(List<Filesource> fileList) {
+    private void setAdapter(List<Filesource> fileList) {
         if (fileList == null || fileList.size() == 0) {
             rvList.removeAllViews();
             return;
@@ -97,11 +101,15 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
         searchAdapter.notifyDataSetChanged();
     }
 
-    private static class MyAsyncTask extends AsyncTask<String, Void, List<Filesource>> {
+    private class MyAsyncTask extends AsyncTask<String, Void, List<Filesource>> {
 
         @Override
         protected List<Filesource> doInBackground(String... strings) {
-            String url = strings[0];
+
+            sp = getSharedPreferences("login_info", MODE_PRIVATE);
+            final String token = sp.getString("token", "ERROR");
+
+            String url = NetConstant.getFileListURL();
             List<Filesource> fileList = null;
             OkHttpClient client = new OkHttpClient();
 
@@ -111,6 +119,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
 
             Request request = new Request.Builder()
                     .url(url)
+                    .addHeader("Authorization", token)
                     .post(requestBody)
                     .build();
 
@@ -128,11 +137,13 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("fileList成功获取");
             return fileList;
         }
 
         @Override
         protected void onPostExecute(List<Filesource> file) {
+            System.out.println("onPosetExecut() called");
             super.onPostExecute(file);
             setAdapter(file);
         }

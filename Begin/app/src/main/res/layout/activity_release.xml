@@ -11,9 +11,19 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/et_fileaddactivity_filename"
-            android:textColor="#FFFFFF" android:hint="请输入资料名称"
-            android:textColorHint="#FFFFFF" app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/et_releaseactivity_taskname"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="112dp"
+            app:layout_constraintHorizontal_bias="0.497" android:textColor="#FFFFFF" android:textSize="30sp"
+            android:hint="请输入任务名称" android:textColorHint="#FFFFFF"/>
+    <EditText
+            android:layout_width="357dp"
+            android:layout_height="482dp"
+            android:inputType="textMultiLine"
+            android:gravity="start|top"
+            android:ems="10"
+            android:id="@+id/editTextTextMultiLine"
+            app:layout_constraintTop_toBottomOf="@+id/et_releaseactivity_taskname"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="120dp" app:layout_constraintHorizontal_bias="0.497"/>
+            android:layout_marginTop="72dp" app:layout_constraintHorizontal_bias="0.555"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

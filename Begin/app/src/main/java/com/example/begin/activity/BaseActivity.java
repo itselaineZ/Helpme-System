@@ -2,6 +2,7 @@ package com.example.begin.activity;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.Window;
@@ -46,5 +47,10 @@ public class BaseActivity extends AppCompatActivity {
             toast = null;
         }
     }
+
+    /*
+    public static SharedPreferences getSharedPreferences (Context ctxt, String info) {
+        return ctxt.getSharedPreferences(info, MODE_PRIVATE);
+    }*/
 }
 

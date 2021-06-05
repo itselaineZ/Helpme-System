@@ -12,8 +12,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeee"
-    tools:context=".loginActivity">
+    android:background="@drawable/firstbackground"
+    >
 <!--
 整体是相对布局，
 在整体上方放三个东西，这三个东西也是相对布局
@@ -24,11 +24,6 @@
       ←   登录       注册
 下面是具体代码
 -->
-
-    <ImageView
-            android:src="@drawable/firstbackground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/iv_loginactivity_bg"/>
 
     <!--
  顶部三个东西摆放好之后

@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Course implements Serializable{
     private long id;
-    private String coursename;
+    private String name;
 
     public long getId(){return id;}
 
     public void setId(long id){this.id = id;}
 
-    public String getCoursename(){return coursename;}
+    public String getName(){return name;}
 
-    public void setCoursename(String coursename){this.coursename = coursename;}
+    public void setName(String name){this.name = name;}
 
 }

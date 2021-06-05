@@ -137,7 +137,7 @@ public class CueActivity extends BaseActivity implements View.OnClickListener {
                                     editor.putString("password", password); // 注意这里是password1
 
                                     if (editor.commit()) {
-                                        Intent it_register_to_main = new Intent(CueActivity.this, MainActivity.class);
+                                        Intent it_register_to_main = new Intent(CueActivity.this, LoginActivity.class);
                                         startActivity(it_register_to_main);
                                         // 注册成功后，注册界面就没必要占据资源了
                                         finish();

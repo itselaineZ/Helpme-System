@@ -52,7 +52,7 @@ public class CourseSearchAdapter extends RecyclerView.Adapter<CourseSearchAdapte
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Course course = courseList.get(position);
 
-        String courseName = course.getCoursename();
+        String courseName = course.getName();
         // 设置 课程名
         holder.mTvCoursename.setText(courseName);
 

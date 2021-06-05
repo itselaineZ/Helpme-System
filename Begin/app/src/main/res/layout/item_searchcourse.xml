@@ -8,7 +8,7 @@
                                                    app:layout_constraintEnd_toEndOf="parent"
                                                    app:layout_constraintStart_toStartOf="parent"
                                                    app:layout_constraintTop_toTopOf="parent"
-                                                   android:id="@+id/tv_coursename">
+                                                   android:background="#00FFFFFF">
     <androidx.constraintlayout.widget.Guideline
             android:orientation="horizontal"
             android:layout_width="wrap_content"
@@ -19,9 +19,9 @@
             android:layout_height="wrap_content" android:id="@+id/guideline2" app:layout_constraintGuide_end="7dp"/>
     <TextView
             android:layout_width="411dp"
-            android:layout_height="38dp" android:id="@+id/textView3"
+            android:layout_height="38dp" android:id="@+id/tv_coursename"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:background="#FFFFFF" tools:text="计算机组成原理" android:textColor="#FFFFFF"/>
+            android:background="#00FFFFFF" tools:text="计算机组成原理" android:textColor="#FFFFFF"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

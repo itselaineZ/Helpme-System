@@ -2,15 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/firstbackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/firstbackground"
-            android:id="@+id/iv_cueactivity_bg"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
 
     <ImageView
             android:id="@+id/iv_cueactivity_back"
@@ -20,44 +14,19 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="28dp" android:layout_marginStart="28dp"/>
     <LinearLayout
-            android:layout_width="363dp"
-            android:layout_height="49dp"
-            android:orientation="horizontal"
-            android:id="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp">
-
-        <TextView
-                android:id="@+id/tv_cueactivity_password1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="密    码：" tools:layout_editor_absoluteY="286dp" tools:layout_editor_absoluteX="29dp"
-                android:textColor="#FFFFFF"/>
-
-        <EditText
-                android:id="@+id/et_cueactivity_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="请输入密码" tools:layout_editor_absoluteY="272dp" tools:layout_editor_absoluteX="85dp"
-                android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
-
-    </LinearLayout>
-    <LinearLayout
             android:layout_width="361dp"
             android:layout_height="48dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="@+id/iv_cueactivity_bg"
             android:id="@+id/linearLayout2"
-            android:layout_marginTop="200dp"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="192dp"
+            app:layout_constraintHorizontal_bias="0.562">
 
         <TextView
                 android:id="@+id/tv_cueactivity_username"
                 android:layout_width="57dp"
                 android:layout_height="wrap_content"
-                android:text="邮    箱：" tools:layout_editor_absoluteY="335dp" tools:layout_editor_absoluteX="29dp"
+                android:text="邮    箱：" tools:layout_editor_absoluteY="207dp" tools:layout_editor_absoluteX="18dp"
                 android:textColor="#FFFFFF"/>
 
         <EditText
@@ -66,8 +35,33 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="请输入邮箱" tools:layout_editor_absoluteY="321dp" tools:layout_editor_absoluteX="86dp"
+                android:hint="请输入邮箱" tools:layout_editor_absoluteY="193dp" tools:layout_editor_absoluteX="75dp"
                 android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="363dp"
+            android:layout_height="49dp"
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" android:layout_marginTop="16dp">
+
+        <TextView
+                android:id="@+id/tv_cueactivity_password1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密    码：" tools:layout_editor_absoluteY="259dp" tools:layout_editor_absoluteX="18dp"
+                android:textColor="#FFFFFF"/>
+
+        <EditText
+                android:id="@+id/et_cueactivity_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="请输入密码" tools:layout_editor_absoluteY="245dp" tools:layout_editor_absoluteX="74dp"
+                android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
+
     </LinearLayout>
     <Button
             android:id="@+id/bt_cueactivity_submit"
