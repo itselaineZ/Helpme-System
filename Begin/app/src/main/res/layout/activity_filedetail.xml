@@ -6,14 +6,6 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
 
-    <TextView
-            android:layout_width="229dp"
-            android:layout_height="41dp" android:id="@+id/tv_filedetailactivity_coursename"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" tools:text="课程名称" android:textSize="30sp"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="120dp"
-            app:layout_constraintHorizontal_bias="0.512"/>
     <Button
             android:text="下载"
             android:layout_width="253dp"
@@ -25,10 +17,10 @@
     <TextView
             android:layout_width="232dp"
             android:layout_height="51dp" android:id="@+id/tv_filedetailactivity_filename"
-            app:layout_constraintTop_toBottomOf="@+id/tv_filedetailactivity_coursename"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="44dp" app:layout_constraintHorizontal_bias="0.506" android:textSize="30sp"
-            android:textColor="#FFFFFF" tools:text="资料名称"/>
+            app:layout_constraintHorizontal_bias="0.496" android:textSize="30sp"
+            android:textColor="#FFFFFF" tools:text="资料名称" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="96dp"/>
     <RadioGroup
             android:layout_width="252dp"
             android:layout_height="160dp"
@@ -76,5 +68,12 @@
             android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back"
             android:id="@+id/iv_filedetailactivity_back" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="28dp"
-            android:layout_marginStart="28dp"/>
+            android:layout_marginStart="28dp" android:layout_width="wrap_content"/>
+    <Button
+            android:text="评价"
+            android:layout_width="253dp"
+            android:layout_height="43dp" android:id="@+id/bt_filedetailactivity_evaluate"
+            app:layout_constraintTop_toBottomOf="@+id/rg_filedetailactivity_evaluate"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="36dp" android:background="#DAB103" android:textColor="#FFFFFF"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

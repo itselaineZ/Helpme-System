@@ -98,7 +98,7 @@ public class CourselistActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.iv_courseactivity_addcourse:
-                //startActivity(new Intent(this, CourseaddActivity.class));
+                startActivity(new Intent(this, CourseaddActivity.class));
                 finish();
                 break;
         }

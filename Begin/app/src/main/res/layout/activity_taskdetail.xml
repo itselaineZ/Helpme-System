@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools" android:background="@drawable/mainbackground"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back" android:id="@+id/iv_taskdetailactivity_back"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="28dp" android:layout_marginStart="28dp"/>
+    <TextView
+            android:layout_width="269dp"
+            android:layout_height="47dp" android:id="@+id/tv_taskdetailactivity_title"
+            tools:text="任务标题" android:textColor="#FFFFFF" android:textSize="30sp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="100dp" android:textStyle="bold"/>
+    <TextView
+            android:text="发布人："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView2"
+            android:textColor="#FFFFFF" android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_taskdetailactivity_title"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="28dp"
+            android:layout_marginStart="64dp"/>
+    <TextView
+            android:layout_width="191dp"
+            android:layout_height="24dp" android:id="@+id/tv_taskdetailactivity_publisher"
+            android:textColor="#FFFFFF" android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_taskdetailactivity_title" android:layout_marginTop="28dp"
+            app:layout_constraintStart_toEndOf="@+id/textView2" tools:text="TextView"/>
+    <Button
+            android:text="接收任务"
+            android:layout_width="264dp"
+            android:layout_height="47dp" android:id="@+id/bt_taskdetailactivity_recieve"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.496"
+            android:textColor="#FFFFFF" android:background="#DBA103"
+            app:layout_constraintTop_toBottomOf="@+id/tv_taskdetailactivity_description"
+            android:layout_marginTop="48dp"/>
+    <TextView
+            android:layout_width="264dp"
+            android:layout_height="286dp" android:id="@+id/tv_taskdetailactivity_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_taskdetailactivity_title"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="100dp" app:layout_constraintHorizontal_bias="0.496" android:textColor="#FFFFFF"
+            tools:text="任务描述" android:textSize="18sp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

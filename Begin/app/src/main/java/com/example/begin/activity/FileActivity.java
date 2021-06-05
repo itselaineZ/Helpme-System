@@ -84,7 +84,9 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.iv_fileactivity_addfile:
-                //startActivity(new Intent(this, FileaddActivity.class));
+                Intent intent = new Intent(this, FileaddActivity.class);
+                intent.putExtra("courseName", courseName);
+                startActivity(intent);
                 finish();
                 break;
 

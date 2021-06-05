@@ -16,4 +16,10 @@
             android:textColorHint="#FFFFFF" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="120dp" app:layout_constraintHorizontal_bias="0.497"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back"
+            android:id="@+id/iv_fileaddactivity_back"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="28dp" android:layout_marginStart="28dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

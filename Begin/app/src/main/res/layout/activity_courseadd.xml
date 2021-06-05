@@ -33,4 +33,9 @@
             app:layout_constraintTop_toBottomOf="@+id/et_courseaddactivity_courseid" android:layout_marginTop="124dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="84dp"
             android:background="#DBA103" android:textColor="#FFFFFF"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back" android:id="@+id/iv_courseaddactivity_back"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="28dp" android:layout_marginStart="28dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

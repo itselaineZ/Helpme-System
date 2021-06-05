@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.example.begin.constant.NetConstant;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -21,20 +23,37 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
     SharedPreferences.Editor editor;
     // Log打印的通用Tag
     private final String TAG = "FileaddActivity";
+    private String courseName;
+
+    private ImageView mIvFileaddActivityBack;
+    private TextView mTvFileaddActivityFilename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_fileadd);
-        //initView();
+        setContentView(R.layout.activity_fileadd);
+        initView();
+
+        Bundle bundle = this.getIntent().getExtras();
+        courseName = bundle.getString("courseName");
+
+    }
+
+    private void initView(){
+        mIvFileaddActivityBack = findViewById(R.id.iv_fileaddactivity_back);
+        mTvFileaddActivityFilename = findViewById(R.id.tv_filedetailactivity_filename);
 
     }
 
     public void onClick(View view){
-        //switch (view.getId()){
+        switch (view.getId()){
             //case R.id.bt_fileaddactivitty_submit:
-
-        //}
+            case R.id.iv_fileaddactivity_back:
+                Intent intent = new Intent(this, FileActivity.class);
+                intent.putExtra("courseName", courseName);
+                startActivity(intent);
+                break;
+        }
     }
 
     private void asyncLogin(final String email, final String password) {

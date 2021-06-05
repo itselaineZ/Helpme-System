@@ -16,52 +16,50 @@ import okhttp3.*;
 
 import java.io.IOException;
 
-public class CourseaddActivity extends BaseActivity implements View.OnClickListener{
+public class ReleaseActivity extends BaseActivity implements View.OnClickListener{
 
-    // 声明SharedPreferences对象
     SharedPreferences sp;
-    // Log打印的通用Tag
-    private final String TAG = "CourseaddActivity";
 
-    private EditText mEtCourseaddActivityCoursename;
-    private EditText mEtCourseaddActivityCourseID;
-    private Button mBtCourseaddActivityAddBt;
-    private ImageView mIvCourseaddActivityBack;
+    private ImageView mIvReleaseActivityBack;
+    private EditText mEtReleaseActivityTitle;
+    private EditText mEtReleaseActivityDescription;
+    private Button mBtReleaseActivityRelease;
+
+    private final String TAG = "ReleaseActivity";
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_courseadd);
+        setContentView(R.layout.activity_release);
 
         initView();
     }
 
     private void initView(){
-        mEtCourseaddActivityCourseID = findViewById(R.id.et_courseaddactivity_courseid);
-        mEtCourseaddActivityCoursename = findViewById(R.id.et_courseaddactivity_coursename);
-        mBtCourseaddActivityAddBt = findViewById(R.id.bt_courseaddactivity_addbt);
-        mIvCourseaddActivityBack = findViewById(R.id.iv_courseaddactivity_back);
+        mIvReleaseActivityBack = findViewById(R.id.iv_releaseactivity_back);
+        mEtReleaseActivityTitle = findViewById(R.id.et_releaseactivity_title);
+        mEtReleaseActivityDescription = findViewById(R.id.et_releaseactivity_description);
+        mBtReleaseActivityRelease =findViewById(R.id.bt_releaseactivity_release);
+
+        mBtReleaseActivityRelease.setOnClickListener(this);
     }
 
     public void onClick(View view){
-        switch (view.getId()){
-            case R.id.bt_courseaddactivity_addbt:
-                String coursename = mEtCourseaddActivityCoursename.getText().toString().trim();
-                String coursrid = mEtCourseaddActivityCourseID.getText().toString().trim();
-                asyncCourse(coursename, coursrid);
+        switch(view.getId()){
+            case R.id.bt_releaseactivity_release:
+                String title = mEtReleaseActivityTitle.getText().toString().trim();
+                String description = mEtReleaseActivityDescription.getText().toString().trim();
+                asyncRelease(title, description);
                 break;
-            case R.id.iv_courseaddactivity_back:
-                startActivity(new Intent(this, CourselistActivity.class));
+            case R.id.iv_releaseactivity_back:
+                startActivity(new Intent(this, TaskActivity.class));
                 finish();
                 break;
         }
     }
 
-    private void asyncCourse(final String courseName, final String courseID) {
-        /*
-         发送请求属于耗时操作，所以开辟子线程执行
-         上面的参数都加上了final，否则无法传递到子线程中
-        */
+    private void asyncRelease(final String title, final String description) {
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -74,8 +72,8 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
                 OkHttpClient okHttpClient = new OkHttpClient();
                 // 2、构建请求体requestBody
                 RequestBody requestBody = new FormBody.Builder()
-                        .add("name", courseName)
-                        .add("no", courseID)
+                        .add("title", title)
+                        .add("description", description)
                         .build();
                 // 3、发送请求，因为要传密码，所以用POST方式
                 Request request = new Request.Builder()
@@ -107,16 +105,16 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
                             JsonObject responseBodyJSONObject = (JsonObject) new JsonParser().parse(responseBodyStr);
                             // 如果返回的status为success，则getStatus返回true，登录验证通过
                             if (getStatus(responseBodyJSONObject).equals("success")) {
-                                startActivity(new Intent(CourseaddActivity.this, CourselistActivity.class));
+                                startActivity(new Intent(ReleaseActivity.this, TaskActivity.class));
                                 finish();
                             } else {
-                                getResponseErrMsg(CourseaddActivity.this, responseBodyJSONObject);
-                                Log.d(TAG, "课程添加失败");
-                                showToastInThread(CourseaddActivity.this, "课程添加失败");
+                                getResponseErrMsg(ReleaseActivity.this, responseBodyJSONObject);
+                                Log.d(TAG, "任务发布失败");
+                                showToastInThread(ReleaseActivity.this, "任务发布失败");
                             }
                         } else {
                             Log.d(TAG, "服务器异常");
-                            showToastInThread(CourseaddActivity.this, "服务器异常");
+                            showToastInThread(ReleaseActivity.this, "服务器异常");
                         }
                     }
                 });
@@ -150,5 +148,4 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
         // 在子线程中显示Toast
         showToastInThread(context, errorMsg);
     }
-
 }

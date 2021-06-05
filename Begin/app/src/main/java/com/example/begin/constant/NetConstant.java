@@ -8,13 +8,12 @@ public class NetConstant {
     private static final String getOtpCodeURL     = "/user/getOtp";
     private static final String loginURL          = "/login";
     private static final String registerURL       = "/register";
-    private static final String createItemURL     = "/item/create";
-    private static final String getItemListURL    = "/item/list";
-    private static final String submitOrderURL    = "/order/createorder";
 
     private static final String CourseListURL = "/course/list";
 
     private static final String FileListURL = "/course/material";
+
+    private static final String TaskListURL = "/task/list";
 
     private static final String getCourseByIdURL = "/news/detail/id?id=";
 
@@ -32,18 +31,6 @@ public class NetConstant {
         return baseService + userURL + registerURL;
     }
 
-    public static String getCreateItemURL() {
-        return createItemURL;
-    }
-
-    public static String getGetItemListURL() {
-        return getItemListURL;
-    }
-
-    public static String getSubmitOrderURL() {
-        return submitOrderURL;
-    }
-
     public static String getCourseListURL() {
         return baseService + CourseListURL;
     }
@@ -51,6 +38,8 @@ public class NetConstant {
     public static String getFileListURL() {
         return baseService + FileListURL;
     }
+
+    public static String getTaskListURL(){return baseService + TaskListURL;}
 
     public static String getCourseByIdURL() {
         return getCourseByIdURL;
