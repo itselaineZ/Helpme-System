@@ -14,9 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.begin.activity.Code;
 import com.example.begin.constant.NetConstant;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -47,6 +44,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private ImageView mIvRegisteractivityBack;
     private LinearLayout mLlRegisteractivityBody;
     private EditText mEtRegisteractivityUsername;
+    private EditText mEtRegisteractivityEmail;
     private EditText mEtRegisteractivityPassword1;
     private EditText mEtRegisteractivityPassword2;
     private EditText mEtRegisteractivityInputcodes;
@@ -72,6 +70,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         mIvRegisteractivityBack = findViewById(R.id.iv_registeractivity_back);
         mLlRegisteractivityBody = findViewById(R.id.ll_registeractivity_body);
         mEtRegisteractivityUsername = findViewById(R.id.et_registeractivity_username);
+        mEtRegisteractivityEmail = findViewById(R.id.et_registeractivity_email);
         mEtRegisteractivityPassword1 = findViewById(R.id.et_registeractivity_password1);
         mEtRegisteractivityPassword2 = findViewById(R.id.et_registeractivity_password2);
         mEtRegisteractivityInputcodes = findViewById(R.id.et_registeractivity_inputcodes);
@@ -96,16 +95,21 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.bt_registeractivity_register:    //注册按钮
                 //获取用户输入的用户名、密码、验证码
                 String username = mEtRegisteractivityUsername.getText().toString().trim();
+                String email = mEtRegisteractivityEmail.getText().toString().trim();
                 String password1 = mEtRegisteractivityPassword1.getText().toString().trim();
                 String password2 = mEtRegisteractivityPassword2.getText().toString().trim();
-                //需要实现两次密码是否相同的比较，此处暂时未实现
+                //需要实现两次密码是否相同的比较
+                if(password1 != password2){
+                    Toast.makeText(this, "两次输入的密码不一致，注册失败", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 String password = password1;
                 String inputcode = mEtRegisteractivityInputcodes.getText().toString().toLowerCase();
                 //注册验证
-                if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(inputcode) ) {
+                if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(inputcode) ) {
                     if (inputcode.equals(realCode)) {
                         //将用户名和密码加入到数据库中
-                        asyncRegister(username, password);
+                        asyncRegister(username, email, password);
                     } else {
                         Toast.makeText(this, "验证码错误,注册失败", Toast.LENGTH_SHORT).show();
                     }
@@ -119,9 +123,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     // okhttp异步请求进行注册
     // 参数统一传递字符串
     // 传递到后端再进行类型转换以适配数据库
-    private void asyncRegister(final String email, final String password) {
+    private void asyncRegister(final String username, final String email, final String password) {
 
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(username)) {
             Toast.makeText(RegisterActivity.this, "存在输入为空，注册失败", Toast.LENGTH_SHORT).show();
         } else {
             // 发送请求属于耗时操作，开辟子线程
@@ -135,6 +139,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     // 注意这里的name 要和后端接收的参数名一一对应，否则无法传递过去
                     RequestBody requestBody = new FormBody.Builder()
                             .add("email", email)
+                            .add("username", username)
                             .add("password", password)
                             .build();
                     // 3、发送请求，特别强调这里是POST方式
@@ -164,7 +169,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                     // 注册成功，记录token
                                     sp = getSharedPreferences("login_info", MODE_PRIVATE);
                                     editor = sp.edit();
-                                    editor.putString("token", "token_value");
+                                    editor.putString("token", getResponseToken(responseBodyJSONObject));
+                                    editor.putString("username", username);
                                     editor.putString("email", email);
                                     editor.putString("password", password); // 注意这里是password1
 
@@ -206,6 +212,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         // 3、通过JSON对象获取对应的属性值
         String status = responseBodyJSONObject.get("status").getAsString();
         return status;
+    }
+
+    private final String getResponseToken(JsonObject responseBodyJSONObject) {
+        String token = responseBodyJSONObject.get("token").getAsString();
+        return token;
     }
 
     // 获取验证码响应data

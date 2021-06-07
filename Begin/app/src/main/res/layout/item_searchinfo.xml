@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="60dp" android:background="#00FFFFFF">
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline7" app:layout_constraintGuide_begin="4dp"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline8" app:layout_constraintGuide_end="4dp"/>
+    <TextView
+            android:layout_width="296dp"
+            android:layout_height="48dp" android:id="@+id/tv_infotitle"
+            app:layout_constraintTop_toTopOf="@+id/guideline7" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline9" app:layout_constraintBottom_toTopOf="@+id/guideline8"
+            tools:text="任务标题" android:textSize="30sp" android:textColor="#FFFFFF" android:background="#00FFFFFF"
+            app:layout_constraintHorizontal_bias="0.313" app:layout_constraintVertical_bias="0.6"/>
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/guideline9" app:layout_constraintGuide_end="139dp"/>
+    <TextView
+            android:text="状 态:"
+            android:layout_width="52dp"
+            android:layout_height="27dp" android:id="@+id/textView5"
+            android:textColor="#00FFFFFF" android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="@+id/guideline9"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="4dp"
+            app:layout_constraintHorizontal_bias="0.0"/>
+    <TextView
+            android:layout_width="82dp"
+            android:layout_height="25dp" android:id="@+id/tv_taskstatus"
+            android:textColor="#FFFFFF" android:textSize="18sp"
+            android:background="#00FFFFFF" tools:text="任务状态" app:layout_constraintStart_toEndOf="@+id/tv_infotitle"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.915"
+            app:layout_constraintBottom_toTopOf="@+id/guideline8" app:layout_constraintTop_toBottomOf="@+id/textView5"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,19 +1,26 @@
 package com.example.begin.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
+import androidx.core.app.ActivityCompat;
 import com.example.begin.constant.NetConstant;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import okhttp3.*;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 public class FileaddActivity extends BaseActivity implements View.OnClickListener{
 
@@ -24,9 +31,12 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
     // Log打印的通用Tag
     private final String TAG = "FileaddActivity";
     private String courseName;
+    private String path;
 
     private ImageView mIvFileaddActivityBack;
-    private TextView mTvFileaddActivityFilename;
+    private EditText mEtFileaddActivityFilename;
+    private Button mBtFileaddActivityChoose;
+    private Button mBtFileaddActivityUpload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -41,13 +51,97 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
 
     private void initView(){
         mIvFileaddActivityBack = findViewById(R.id.iv_fileaddactivity_back);
-        mTvFileaddActivityFilename = findViewById(R.id.tv_filedetailactivity_filename);
+        mEtFileaddActivityFilename = findViewById(R.id.et_fileaddactivity_filename);
+        mBtFileaddActivityChoose = findViewById(R.id.bt_fileaddactivity_choose);
+        mBtFileaddActivityUpload = findViewById(R.id.bt_fileaddactivity_upload);
 
+        mBtFileaddActivityChoose.setOnClickListener(v-> {
+            chooseFile();
+        });
+        mBtFileaddActivityUpload.setOnClickListener(v->
+        {
+            showMessage(uploadFile(path,mEtFileaddActivityFilename.getText().toString()) ? "上传成功" : "上传失败");
+        });
+
+    }
+
+    public void chooseFile()
+    {
+        String [] permissions = new String[]{
+                "android.permission.READ_EXTERNAL_STORAGE"
+        };//所需权限
+        if(ActivityCompat.checkSelfPermission(this,permissions[0]) != PackageManager.PERMISSION_GRANTED)
+        //如果没有权限
+            ActivityCompat.requestPermissions(this,permissions,1);//申请权限
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);//使用系统的文件选择器
+        intent.setType("*/*");//所有类型的文件
+        intent.addCategory(Intent.CATEGORY_OPENABLE);//期望获取的数据可以作为一个File打开
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK)
+        {
+            Uri uri = data.getData();
+            File dir = getExternalFilesDir(null);
+            if(dir != null)
+            {
+                path = dir.toString().substring(0,dir.toString().indexOf("0")+2) +
+                        DocumentsContract.getDocumentId(uri).split(":")[1];
+            }
+        }
+    }
+
+    public boolean uploadFile(String path,String filename)
+    {
+        OkHttpClient okhttp = new OkHttpClient();
+        File file = new File(path);
+        if(path.isEmpty() || !file.exists())
+            return false;
+        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("file",filename,RequestBody.create(new File(path), MediaType.parse("multipart/form-data")))
+                .addFormDataPart("filename",filename)
+                .build();
+        FutureTask<Boolean> task = new FutureTask<>(()->
+        {
+            try
+            {
+                ResponseBody responseBody = okhttp.newCall(
+                        new Request.Builder().post(body).url("http://192.168.1.3:8080/kr/upload").build()
+                ).execute().body();
+
+                if(responseBody != null)
+                    return Boolean.parseBoolean(responseBody.string());
+                return false;
+            }
+            catch (IOException e)
+            {
+                return false;
+            }
+        });
+        try
+        {
+            new Thread(task).start();
+            return task.get();
+        }
+        catch (ExecutionException | InterruptedException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void showMessage(String message)
+    {
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
     public void onClick(View view){
         switch (view.getId()){
-            //case R.id.bt_fileaddactivitty_submit:
             case R.id.iv_fileaddactivity_back:
                 Intent intent = new Intent(this, FileActivity.class);
                 intent.putExtra("courseName", courseName);
@@ -56,109 +150,4 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    private void asyncLogin(final String email, final String password) {
-        /*
-         发送请求属于耗时操作，所以开辟子线程执行
-         上面的参数都加上了final，否则无法传递到子线程中
-        */
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // okhttp异步POST请求； 总共5步
-                // 1、初始化okhttpClient对象
-                OkHttpClient okHttpClient = new OkHttpClient();
-                // 2、构建请求体requestBody
-                RequestBody requestBody = new FormBody.Builder()
-                        .add("email", email)
-                        .add("password", password)
-                        .build();
-                // 3、发送请求，因为要传密码，所以用POST方式
-                Request request = new Request.Builder()
-                        .url(NetConstant.getLoginURL())
-                        .post(requestBody)
-                        .build();
-                // 4、使用okhttpClient对象获取请求的回调方法，enqueue()方法代表异步执行
-                okHttpClient.newCall(request).enqueue(new Callback() {
-                    // 5、重写两个回调方法
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.d(TAG, "请求URL失败： " + e.getMessage());
-                        //showToastInThread(LoginActivity.this, "请求URL失败, 请重试！");
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        // 先判断一下服务器是否异常
-                        String responseStr = response.toString();
-                        if (responseStr.contains("200")) {
-                             /*
-                            注意这里，同一个方法内
-                            response.body().string()只能调用一次，多次调用会报错
-                             */
-                            /* 使用Gson解析response的JSON数据的第一步 */
-                            String responseBodyStr = response.body().string();
-                            /* 使用Gson解析response的JSON数据的第二步 */
-                            JsonObject responseBodyJSONObject = (JsonObject) new JsonParser().parse(responseBodyStr);
-                            // 如果返回的status为success，则getStatus返回true，登录验证通过
-                            if (getStatus(responseBodyJSONObject).equals("success")) {
-                            /*
-                             更新token，下次自动登录
-                             真实的token值应该是一个加密字符串
-                             我为了让token不为null，就随便传了一个字符串
-                             这里的telphone和password每次都要重写的
-                             否则无法实现修改密码
-                            */
-                                sp = getSharedPreferences("login_info", MODE_PRIVATE);
-                                editor = sp.edit();
-                                editor.putString("token", "token_value");
-                                editor.putString("email", email);
-                                editor.putString("password", password);
-                                if (editor.commit()) {
-                                    //Intent it_login_to_main = new Intent(LoginActivity.this, CourselistActivity.class);
-                                    //startActivity(it_login_to_main);
-                                    // 登录成功后，登录界面就没必要占据资源了
-                                    finish();
-                                } else {
-                                    //showToastInThread(LoginActivity.this, "token保存失败，请重新登录");
-                                }
-                            } else {
-                                //getResponseErrMsg(LoginActivity.this, responseBodyJSONObject);
-                                Log.d(TAG, "账号或密码验证失败");
-                            }
-                        } else {
-                            Log.d(TAG, "服务器异常");
-                            //showToastInThread(LoginActivity.this, responseStr);
-                        }
-                    }
-                });
-
-            }
-        }).start();
-    }
-
-    /*
-      使用Gson解析response的JSON数据
-      本来总共是有三步的，一、二步在方法调用之前执行了
-    */
-    private String getStatus(JsonObject responseBodyJSONObject) {
-        /* 使用Gson解析response的JSON数据的第三步
-           通过JSON对象获取对应的属性值 */
-        String status = responseBodyJSONObject.get("status").getAsString();
-        // 登录成功返回的json为{ "status":"success", "data":null }
-        // 只获取status即可，data为null
-        return status;
-    }
-
-    /*
-      使用Gson解析response返回异常信息的JSON中的data对象
-      这也属于第三步，一、二步在方法调用之前执行了
-     */
-    private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
-        JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
-        String errorCode = dataObject.get("errorCode").getAsString();
-        String errorMsg = dataObject.get("errorMsg").getAsString();
-        Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
-        // 在子线程中显示Toast
-        showToastInThread(context, errorMsg);
-    }
 }

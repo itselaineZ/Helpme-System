@@ -18,13 +18,13 @@
             android:layout_marginTop="28dp" android:layout_alignParentTop="true"/>
     <LinearLayout
             android:id="@+id/ll_registeractivity_body"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
+            android:layout_width="358dp"
+            android:layout_height="266dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:orientation="vertical" android:layout_alignParentBottom="true" android:layout_marginBottom="276dp"
+            android:orientation="vertical"
             android:layout_alignParentStart="true" android:layout_marginStart="14dp" android:layout_marginTop="243dp"
-            android:layout_alignParentTop="true" android:layout_alignParentEnd="true" android:layout_marginEnd="11dp">
+            android:layout_alignParentTop="true" android:layout_alignParentEnd="true" android:layout_marginEnd="21dp">
         <!-- 第一个文本编辑框  输入用户名 -->
         <LinearLayout
                 android:layout_width="match_parent"
@@ -32,13 +32,31 @@
                 android:orientation="horizontal">
 
             <TextView
-                    android:id="@+id/tv_cueactivity_username"
+                    android:text="用户名:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_weight="1"
+                    android:textColor="#FFFFFF"/>
+            <EditText
+                    android:layout_width="301dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/et_registeractivity_username" android:textColor="#FFFFFF" android:hint="请输入用户名"
+                    android:textColorHint="#FFFFFF"/>
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/tv_cueactivity_email"
                     android:layout_width="57dp"
                     android:layout_height="wrap_content"
                     android:text="邮    箱：" android:textColor="#FFFFFF"/>
 
             <EditText
-                    android:id="@+id/et_registeractivity_username"
+                    android:id="@+id/et_registeractivity_email"
                     android:layout_width="309dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -124,17 +142,20 @@
             </LinearLayout>
         </LinearLayout>
         <!-- 注册按钮 -->
-        <Button
-                android:id="@+id/bt_registeractivity_register"
-                android:layout_width="354dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="40dp"
-                android:background="#DBA103"
-                android:onClick="onClick"
-                android:text="注册"
-                android:textColor="#fff"/>
 
     </LinearLayout>
+    <Button
+            android:id="@+id/bt_registeractivity_register"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="86dp"
+            android:background="#DBA103"
+            android:onClick="onClick"
+            android:text="注册"
+            android:textColor="#fff" android:layout_alignParentEnd="true" android:layout_marginEnd="21dp"
+            android:layout_alignParentStart="true" android:layout_marginStart="17dp"
+            android:layout_below="@+id/ll_registeractivity_body" android:layout_alignParentBottom="true"
+            android:layout_marginBottom="251dp"/>
 
 </RelativeLayout>

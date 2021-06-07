@@ -6,20 +6,37 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
 
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/et_fileaddactivity_filename"
-            android:textColor="#FFFFFF" android:hint="请输入资料名称"
-            android:textColorHint="#FFFFFF" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="120dp" app:layout_constraintHorizontal_bias="0.497"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back"
             android:id="@+id/iv_fileaddactivity_back"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="28dp" android:layout_marginStart="28dp"/>
+    <Button
+            android:text="选择文件"
+            android:layout_width="230dp"
+            android:layout_height="40dp" android:id="@+id/bt_fileaddactivity_choose"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496" android:textColor="#FFFFFF"
+            android:background="#DBA103"
+            app:layout_constraintTop_toBottomOf="@+id/et_fileaddactivity_filename" android:layout_marginTop="68dp"/>
+    <Button
+            android:text="上传文件"
+            android:layout_width="230dp"
+            android:layout_height="40dp" android:id="@+id/bt_fileaddactivity_upload"
+            app:layout_constraintTop_toBottomOf="@+id/bt_fileaddactivity_choose"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:background="#DBA103" android:textColor="#FFFFFF" android:layout_marginTop="28dp"
+            app:layout_constraintHorizontal_bias="0.496" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.005"/>
+    <EditText
+            android:layout_width="225dp"
+            android:layout_height="55dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/et_fileaddactivity_filename"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="124dp"
+            app:layout_constraintHorizontal_bias="0.497" android:hint="请输入文件名" android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

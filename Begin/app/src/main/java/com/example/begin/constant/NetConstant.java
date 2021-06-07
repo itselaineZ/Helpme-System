@@ -5,23 +5,20 @@ public class NetConstant {
 
     private static final String userURL = "/user";
 
-    private static final String getOtpCodeURL     = "/user/getOtp";
-    private static final String loginURL          = "/login";
-    private static final String registerURL       = "/register";
+    private static final String loginURL            = "/login";
+    private static final String registerURL         = "/register";
 
-    private static final String CourseListURL = "/course/list";
+    private static final String CourseListURL       = "/course/list";
 
-    private static final String FileListURL = "/course/material";
+    private static final String FileListURL         = "/course/material";
 
-    private static final String TaskListURL = "/task/list";
+    private static final String DownloadURL         = "/download";
 
-    private static final String getCourseByIdURL = "/news/detail/id?id=";
+    private static final String TaskListURL         = "/task/list";
 
-    private static final String getCourseByTitleURL = "/news/detail/title?title=";
+    private static final String InformListURL       = "/inform/list";
 
-    public static String getGetOtpCodeURL() {
-        return getOtpCodeURL;
-    }
+    private static final String RecievedTaskURL     = "recieved/list";
 
     public static String getLoginURL() {
         return baseService + userURL +loginURL;
@@ -39,13 +36,13 @@ public class NetConstant {
         return baseService + FileListURL;
     }
 
+    public static String getDownloadURL() {
+        return baseService + DownloadURL;
+    }
+
     public static String getTaskListURL(){return baseService + TaskListURL;}
 
-    public static String getCourseByIdURL() {
-        return getCourseByIdURL;
-    }
+    public static String getInformListURL(){return baseService + InformListURL;}
 
-    public static String getCourseByTitleURL() {
-        return getCourseByTitleURL;
-    }
+    public static String getRecievedTaskURL(){return baseService + RecievedTaskURL;}
 }

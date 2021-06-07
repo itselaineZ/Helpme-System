@@ -3,16 +3,23 @@ package com.example.begin.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import androidx.core.app.ActivityCompat;
 import com.example.begin.constant.NetConstant;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import okhttp3.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 public class FiledetailActivity extends BaseActivity implements View.OnClickListener{
 
@@ -41,6 +48,22 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
         fileName = bundle.getString("fileName");
 
         initView();
+
+        mBtFiledetailActivityDownload.setOnClickListener(v->
+        {
+            String [] permissions = new String[]{
+                    "android.permission.WRITE_EXTERNAL_STORAGE"
+            };//所需权限
+            if(ActivityCompat.checkSelfPermission(this,permissions[0]) != PackageManager.PERMISSION_GRANTED)
+            //如果没有权限
+                ActivityCompat.requestPermissions(this,permissions,1);//申请权限
+
+            File file = downloadFile(fileName);
+            if(file == null)
+                showMessage("文件不存在");
+            else
+                showMessage("文件下载成功");
+        });
     }
 
     private void initView(){
@@ -166,5 +189,74 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
         Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
         // 在子线程中显示Toast
         showToastInThread(context, errorMsg);
+    }
+
+    public File downloadFile(String filename)
+    {
+        OkHttpClient okhttp = new OkHttpClient();
+        if(filename == null || filename.isEmpty())
+            return null;
+        RequestBody body = new MultipartBody.Builder()
+                .addFormDataPart("courseMaterialName",filename)
+                .build();
+
+        FutureTask<File> task = new FutureTask<>(()->
+        {
+            String URL = NetConstant.getDownloadURL();
+            ResponseBody responseBody = okhttp.newCall(
+                    new Request.Builder()
+                            .post(body)
+                            .url(URL)
+                            .build()
+            ).execute().body();
+            if(responseBody != null)
+            {
+                if(getExternalFilesDir(null) != null)
+                {
+                    File file = new File(getExternalFilesDir(null).toString() + "/" + filename);
+                    try (
+                            InputStream inputStream = responseBody.byteStream();
+                            FileOutputStream outputStream = new FileOutputStream(file)
+                    )
+                    {
+                        byte[] b = new byte[1024];
+                        int n;
+                        if((n = inputStream.read(b)) != -1)
+                        {
+                            outputStream.write(b,0,n);
+                            while ((n = inputStream.read(b)) != -1)
+                                outputStream.write(b, 0, n);
+                            return file;
+                        }
+                        else
+                        {
+                            file.delete();
+                            return null;
+                        }
+                    }
+                }
+            }
+            return null;
+        });
+        try
+        {
+            new Thread(task).start();
+            return task.get();
+        }
+        catch (InterruptedException | ExecutionException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void showMessage(String message)
+    {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    public void e(String message)
+    {
+        Log.e("LOG_E",message);
     }
 }
