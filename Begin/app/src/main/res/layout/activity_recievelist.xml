@@ -16,6 +16,8 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_recievelistactivity_back" app:layout_constraintVertical_bias="0.0"/>
     <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back" android:id="@+id/iv_recievelistactivity_back"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back"
+            android:id="@+id/iv_recievelistactivity_back"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:onClick="onClick"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

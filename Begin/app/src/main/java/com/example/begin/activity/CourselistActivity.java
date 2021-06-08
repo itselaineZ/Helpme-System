@@ -74,6 +74,7 @@ public class CourselistActivity extends BaseActivity implements View.OnClickList
 
         mIbCourselistActivityUserBt.setOnClickListener(this);
         mIbCourselistActivityTaskBt.setOnClickListener(this);
+        mIvCourselistActivityAddcourseBt.setOnClickListener(this);
     }
 
     private void setAdapter(List<Course> courseList) {
@@ -94,7 +95,7 @@ public class CourselistActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.ib_courselistactivity_userbt:
-                //startActivity(new Intent(this, UsersetActivity.class));
+                startActivity(new Intent(this, UserhomeActivity.class));
                 finish();
                 break;
             case R.id.iv_courseactivity_addcourse:

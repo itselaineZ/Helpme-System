@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.example.begin.adapter.InformSearchAdapter;
+import com.example.begin.adapter.PublishedSearchAdapter;
+import com.example.begin.adapter.TaskSearchAdapter;
 import com.example.begin.bean.Information;
 import com.example.begin.bean.Tasksource;
 import com.example.begin.constant.NetConstant;
@@ -25,46 +27,46 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InformlistActivity extends BaseActivity implements View.OnClickListener{
+public class PublishedtaskActivity extends BaseActivity implements View.OnClickListener{
 
     SharedPreferences sp;
 
-    private ImageView mIvInformlistActivityBack;
+    private ImageView mIvPublishedtaskActivityBack;
     private static RecyclerView rvList;
-    private static InformSearchAdapter searchAdapter;
-    private List<Information> infoList = new ArrayList<>();
-    private static final String TAG = "InformlistActivity";
+    private static PublishedSearchAdapter searchAdapter;
+    private List<Tasksource> releasedList = new ArrayList<>();
+    private static final String TAG = "PublishedtaskActivity";
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_inform);
+        setContentView(R.layout.activity_publishedtask);
 
         initView();
     }
 
     private void initView(){
-        mIvInformlistActivityBack = findViewById(R.id.iv_informactivity_back);
-        rvList = findViewById(R.id.rv_informactivity_list);
+        mIvPublishedtaskActivityBack = findViewById(R.id.iv_publishedtaskactivity_back);
+        rvList = findViewById(R.id.rv_publishedtaskactivity_list);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvList.setLayoutManager(layoutManager);
 
-        setAdapter(infoList);
+        setAdapter(releasedList);
 
         String url = NetConstant.getInformListURL();
-        InformlistActivity.MyAsyncTask task = new InformlistActivity.MyAsyncTask();
+        PublishedtaskActivity.MyAsyncTask task = new PublishedtaskActivity.MyAsyncTask();
         task.execute(url);
 
-        mIvInformlistActivityBack.setOnClickListener(this);
+        mIvPublishedtaskActivityBack.setOnClickListener(this);
     }
 
-    private void setAdapter(List<Information> infoList){
-        if(infoList == null || infoList.size() == 0){
+    private void setAdapter(List<Tasksource> releasedList){
+        if(releasedList == null || releasedList.size() == 0){
             rvList.removeAllViews();
             return;
         }
-        searchAdapter = new InformSearchAdapter(infoList);
+        searchAdapter = new PublishedSearchAdapter(releasedList);
         rvList.setAdapter(searchAdapter);
         searchAdapter.notifyDataSetChanged();
 
@@ -72,23 +74,23 @@ public class InformlistActivity extends BaseActivity implements View.OnClickList
 
     public void onClick(View view){
         switch(view.getId()){
-            case R.id.iv_informactivity_back:
+            case R.id.iv_publishedtaskactivity_back:
                 startActivity(new Intent(this, UserhomeActivity.class));
                 finish();
                 break;
         }
     }
 
-    private class MyAsyncTask extends AsyncTask<String, Void, List<Information>> {
+    private class MyAsyncTask extends AsyncTask<String, Void, List<Tasksource>> {
 
         @Override
-        protected List<Information> doInBackground(String... strings) {
+        protected List<Tasksource> doInBackground(String... strings) {
 
             sp = getSharedPreferences("login_info", MODE_PRIVATE);
             final String token = sp.getString("token", "ERROR");
 
-            String url = NetConstant.getInformListURL();
-            List<Information> infoList = null;
+            String url = NetConstant.getPublishedTaskURL();
+            List<Tasksource> releaseList = null;
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
@@ -105,17 +107,17 @@ public class InformlistActivity extends BaseActivity implements View.OnClickList
                 if (TextUtils.equals(status, "success")) {
                     JsonArray data = jsonObject.get("data").getAsJsonArray();
                     String dataStr = data.toString();
-                    infoList = JSON.parseArray(dataStr, Information.class);
+                    releasedList = JSON.parseArray(dataStr, Tasksource.class);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("infoList成功获取");
-            return infoList;
+            System.out.println("releasedList成功获取");
+            return releasedList;
         }
 
         @Override
-        protected void onPostExecute(List<Information> info) {
+        protected void onPostExecute(List<Tasksource> info) {
             System.out.println("onPosetExecut() called");
             super.onPostExecute(info);
             setAdapter(info);

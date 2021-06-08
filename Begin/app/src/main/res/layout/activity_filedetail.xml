@@ -68,7 +68,7 @@
             android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back"
             android:id="@+id/iv_filedetailactivity_back" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="28dp"
-            android:layout_marginStart="28dp" android:layout_width="wrap_content"/>
+            android:layout_marginStart="28dp" android:layout_width="wrap_content" android:onClick="onClick"/>
     <Button
             android:text="评价"
             android:layout_width="253dp"

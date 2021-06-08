@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class Tasksource implements Serializable {
     private String id;
     private String title;
-    private String publisherId;
-    private String recieverId;
+    private String publisherName;
+    private String receiverName;
     private String description;
 
     public String getId(){return id;}
@@ -17,13 +17,13 @@ public class Tasksource implements Serializable {
 
     public void setTitle(String title){this.title = title;}
 
-    public String getPublisherId(){return publisherId;}
+    public String getPublisherName(){return publisherName;}
 
-    public void setPublisherId(String publisherId){this.publisherId = publisherId;}
+    public void setPublisherName(String publisherName){this.publisherName = publisherName;}
 
-    public String getRecieverId(){return recieverId;}
+    public String getReceiverName(){return receiverName;}
 
-    public void setRecieverId(String recieverId){this.recieverId = recieverId;}
+    public void setReceiverName(String receiverName){this.receiverName = receiverName;}
 
     public String getDescription(){return description;}
 

@@ -18,7 +18,7 @@ public class InformSearchAdapter extends RecyclerView.Adapter<InformSearchAdapte
     private List<Information> infoList;
 
     //接收参数
-    public InformSearchAdapter(List<Information> taskList){ this.infoList = infoList; }
+    public InformSearchAdapter(List<Information> infoList){ this.infoList = infoList; }
 
     @NonNull
     @Override
@@ -46,8 +46,8 @@ public class InformSearchAdapter extends RecyclerView.Adapter<InformSearchAdapte
     public void onBindViewHolder(@NonNull InformSearchAdapter.MyViewHolder holder, int position) {
         Information info = infoList.get(position);
 
-        String title = info.getInformTitle();
-        String status = info.getInformStatus();
+        String title = info.getTitle();
+        String status = info.getContent();
 
         holder.mTvInformTitle.setText(title);
         holder.mTvInformStatus.setText(status);

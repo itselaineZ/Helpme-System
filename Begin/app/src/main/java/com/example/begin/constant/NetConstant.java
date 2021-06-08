@@ -16,9 +16,13 @@ public class NetConstant {
 
     private static final String TaskListURL         = "/task/list";
 
-    private static final String InformListURL       = "/inform/list";
+    private static final String InformListURL       = "/message";
 
-    private static final String RecievedTaskURL     = "recieved/list";
+    private static final String RecievedTaskURL     = "/task/myReceive";
+
+    private static final String TaskDetailURL       = "/task/detail";
+
+    private static final String PublishedTaskURL        = "/task/myPublish";
 
     public static String getLoginURL() {
         return baseService + userURL +loginURL;
@@ -45,4 +49,8 @@ public class NetConstant {
     public static String getInformListURL(){return baseService + InformListURL;}
 
     public static String getRecievedTaskURL(){return baseService + RecievedTaskURL;}
+
+    public static String getTaskDetailURL(){return baseService + TaskDetailURL;}
+
+    public static String getPublishedTaskURL(){return baseService + PublishedTaskURL;}
 }

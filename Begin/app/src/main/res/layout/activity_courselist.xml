@@ -15,14 +15,15 @@
             android:layout_height="120dp" app:srcCompat="@drawable/course"
             android:id="@+id/ib_courselistactivity_coursebt" android:background="#000099CC"
             app:layout_constraintTop_toBottomOf="@+id/rv_CourselistActivity_list"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="onClick"/>
     <ImageButton
             android:layout_width="130dp"
             android:layout_height="120dp" app:srcCompat="@drawable/task"
             android:id="@+id/ib_courseactivity_taskbt" android:background="#000099CC"
             app:layout_constraintTop_toBottomOf="@+id/rv_CourselistActivity_list"
             app:layout_constraintStart_toEndOf="@+id/ib_courselistactivity_coursebt"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" android:onClick="onClick"/>
     <ImageButton
             android:layout_width="130dp"
             android:layout_height="120dp" app:srcCompat="@drawable/setting"
@@ -30,7 +31,8 @@
             android:background="#000099CC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ib_courseactivity_taskbt"/>
+            app:layout_constraintStart_toEndOf="@+id/ib_courseactivity_taskbt"
+            app:layout_constraintTop_toTopOf="@+id/ib_courseactivity_taskbt" android:onClick="onClick"/>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="389dp"
             android:layout_height="668dp"
@@ -43,5 +45,6 @@
     <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp" app:srcCompat="@drawable/add" android:id="@+id/iv_courseactivity_addcourse"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:onClick="onClick"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

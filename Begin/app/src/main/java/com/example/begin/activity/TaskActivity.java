@@ -41,15 +41,15 @@ public class TaskActivity extends BaseActivity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.ib_taskactivity_userbt:
-                //startActivity(new Intent(this, UsersetActivity.class));
+                startActivity(new Intent(this, UserhomeActivity.class));
                 finish();
                 break;
             case R.id.rl_taskactivity_release:
-                //startActivity(new Intent(this, ReleaseActivity.class));
+                startActivity(new Intent(this, ReleaseActivity.class));
                 finish();
                 break;
             case R.id.rl_taskactivity_recieve:
-                //startActivity(new Intent(this, RecievelistActivity.class));
+                startActivity(new Intent(this, RecievelistActivity.class));
                 finish();
                 break;
         }

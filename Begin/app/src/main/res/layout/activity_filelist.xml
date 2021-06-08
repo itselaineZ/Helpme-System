@@ -18,7 +18,8 @@
             android:layout_width="130dp"
             android:layout_height="120dp" app:srcCompat="@drawable/course"
             android:id="@+id/ib_fileactivity_coursebt" android:background="#000099CC"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="onClick"/>
     <ImageButton
             android:layout_width="130dp"
             android:layout_height="120dp" app:srcCompat="@drawable/task"
@@ -26,16 +27,19 @@
             android:background="#000099CC"
             app:layout_constraintStart_toEndOf="@+id/ib_fileactivity_coursebt"
             app:layout_constraintTop_toBottomOf="@+id/rv_fileactivity_list"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="1.0"/>
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="1.0"
+            android:onClick="onClick"/>
     <ImageButton
             android:layout_width="130dp"
             android:layout_height="120dp" app:srcCompat="@drawable/setting"
             android:background="#000099CC"
             android:id="@+id/ib_fileactivity_userbt"
             app:layout_constraintStart_toEndOf="@+id/ib_fileactivity_taskbt"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="onClick"/>
     <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp" app:srcCompat="@drawable/add" android:id="@+id/iv_fileactivity_addfile"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:onClick="onClick"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

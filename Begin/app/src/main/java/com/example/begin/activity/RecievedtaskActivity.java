@@ -71,7 +71,7 @@ public class RecievedtaskActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View view){
         switch(view.getId()){
             case R.id.iv_revievedtaskactivity_back:
-                //startActivity(new Intent(this, UserActivity.class));
+                startActivity(new Intent(this, UserhomeActivity.class));
                 finish();
                 break;
         }

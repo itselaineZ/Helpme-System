@@ -79,6 +79,10 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
         mRgFiledetailActivity = findViewById(R.id.rg_filedetailactivity_evaluate);
 
         mTvFiledetailActivityFileName.setText(fileName);
+
+        mBtFiledetailActivityDownload.setOnClickListener(this);
+        mBtFiledetailActivityEvaluate.setOnClickListener(this);
+        mIvFiledetailActivityBack.setOnClickListener(this);
     }
 
     public void onClick(View view){

@@ -23,19 +23,20 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline6" app:layout_constraintHorizontal_bias="0.0"/>
     <TextView
             android:layout_width="120dp"
-            android:layout_height="31dp" android:id="@+id/tv_taskpublisher"
+            android:layout_height="31dp" android:id="@+id/tv_taskperson"
             android:textColor="#FFFFFF" android:textSize="24sp"
-            tools:text="TextView" app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:text="TextView" app:layout_constraintTop_toBottomOf="@+id/tv_persontitle"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="14dp" android:background="#00FFFFFF"
             app:layout_constraintStart_toStartOf="@+id/guideline6" app:layout_constraintHorizontal_bias="0.8"/>
     <TextView
-            android:text="发布者："
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/textView3"
+            android:layout_height="wrap_content" android:id="@+id/tv_persontitle"
             android:textColor="#FFFFFF" android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="@+id/guideline10" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp" android:layout_marginEnd="76dp" android:background="#00FFFFFF"
-            app:layout_constraintStart_toStartOf="@+id/guideline6" app:layout_constraintHorizontal_bias="1.0"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline10"
+            android:layout_marginTop="12dp" android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            tools:text="发布者/接收者" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"/>
     <androidx.constraintlayout.widget.Guideline
             android:orientation="vertical"
             android:layout_width="wrap_content"

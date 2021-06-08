@@ -34,10 +34,9 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
     private static FileSearchAdapter searchAdapter;
     private ImageButton mIbFileActivityTaskBt;
     private ImageButton mIbFileActivityUserBt;
-    private ImageView mIvFileActivityAddfileBt;
+    private ImageView mIvFileActivityAddfile;
     private List<Filesource> fileList = new ArrayList<>();
     private static final String TAG = "FileActivity";
-    private ImageButton mIbFileActivityAddfile;
     public static String courseName;
 
     @Override
@@ -55,7 +54,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
     private void initView(){
         mIbFileActivityTaskBt = findViewById(R.id.ib_fileactivity_taskbt);
         mIbFileActivityUserBt = findViewById(R.id.ib_fileactivity_userbt);
-        mIvFileActivityAddfileBt = findViewById(R.id.iv_fileactivity_addfile);
+        mIvFileActivityAddfile = findViewById(R.id.iv_fileactivity_addfile);
         rvList = findViewById(R.id.rv_fileactivity_list);
 
         //布局管理
@@ -71,6 +70,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
 
         mIbFileActivityUserBt.setOnClickListener(this);
         mIbFileActivityTaskBt.setOnClickListener(this);
+        mIvFileActivityAddfile.setOnClickListener(this);
     }
 
     public void onClick(View view){
@@ -80,7 +80,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
                 finish();
                 break;
             case R.id.ib_fileactivity_userbt:
-                //startActivity(new Intent(this, UsersetActivity.class));
+                startActivity(new Intent(this, UserhomeActivity.class));
                 finish();
                 break;
             case R.id.iv_fileactivity_addfile:

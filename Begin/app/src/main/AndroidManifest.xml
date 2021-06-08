@@ -21,9 +21,19 @@
         <activity android:name=".CueActivity"/>
         <activity android:name=".BaseActivity"/>
         <activity android:name=".CourselistActivity"/>
+        <activity android:name=".CourseaddActivity"/>
         <activity android:name=".FileActivity"/>
-        <activity android:name=".TaskActivity"/>
+        <activity android:name=".FileaddActivity"/>
         <activity android:name=".FiledetailActivity"/>
+        <activity android:name=".TaskActivity"/>
+        <activity android:name=".ReleaseActivity"/>
+        <activity android:name=".RecievelistActivity"/>
+        <activity android:name=".TaskdetailActivity"/>
+        <activity android:name=".InformlistActivity"/>
+        <activity android:name=".RecievedtaskActivity"/>
+        <activity android:name=".UserhomeActivity"/>
+        <activity android:name=".PublishedtaskActivity"/>
+        <activity android:name=".PublishdetailActivity"/>
     </application>
 
 </manifest>

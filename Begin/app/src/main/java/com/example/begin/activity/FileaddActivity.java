@@ -55,6 +55,10 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
         mBtFileaddActivityChoose = findViewById(R.id.bt_fileaddactivity_choose);
         mBtFileaddActivityUpload = findViewById(R.id.bt_fileaddactivity_upload);
 
+        mBtFileaddActivityChoose.setOnClickListener(this);
+        mBtFileaddActivityUpload.setOnClickListener(this);
+        mIvFileaddActivityBack.setOnClickListener(this);
+
         mBtFileaddActivityChoose.setOnClickListener(v-> {
             chooseFile();
         });

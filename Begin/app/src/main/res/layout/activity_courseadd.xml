@@ -35,7 +35,8 @@
             android:background="#DBA103" android:textColor="#FFFFFF"/>
     <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back" android:id="@+id/iv_courseaddactivity_back"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back"
+            android:id="@+id/iv_courseaddactivity_back"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="28dp" android:layout_marginStart="28dp"/>
+            android:layout_marginTop="28dp" android:layout_marginStart="28dp" android:onClick="onClick"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

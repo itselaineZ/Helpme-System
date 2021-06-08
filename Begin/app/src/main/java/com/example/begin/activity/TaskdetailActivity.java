@@ -3,18 +3,25 @@ package com.example.begin.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.alibaba.fastjson.JSON;
+import com.example.begin.bean.Filesource;
 import com.example.begin.constant.NetConstant;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.util.List;
 
 public class TaskdetailActivity extends BaseActivity implements View.OnClickListener{
 
@@ -26,6 +33,9 @@ public class TaskdetailActivity extends BaseActivity implements View.OnClickList
     private TextView mTvTaskdetailActivityPublisher;
     private TextView mTvTaskdetailActivityDescription;
     private String taskId;
+    private String publisherId;
+    private String description;
+    private String title;
     private final String TAG = "TaskdetailActivity";
 
     @Override
@@ -35,19 +45,26 @@ public class TaskdetailActivity extends BaseActivity implements View.OnClickList
 
         Bundle bundle = this.getIntent().getExtras();
         taskId = bundle.getString("taskId");
+        publisherId = bundle.getString("publisherId");
+        description = bundle.getString("description");
+        title = bundle.getString("title");
 
         initView();
-
     }
 
     private void initView(){
         mIvTaskdetailActivityBack = findViewById(R.id.iv_taskdetailactivity_back);
         mBtTaskdetailActivityRecieve = findViewById(R.id.bt_taskdetailactivity_recieve);
-        mTvTaskdetailActivityTitle = findViewById(R.id.tv_tasktitle);
-        mTvTaskdetailActivityPublisher = findViewById(R.id.tv_taskpublisher);
+        mTvTaskdetailActivityTitle = findViewById(R.id.tv_taskdetailactivity_title);
+        mTvTaskdetailActivityPublisher = findViewById(R.id.tv_taskdetailactivity_publisher);
         mTvTaskdetailActivityDescription = findViewById(R.id.tv_taskdetailactivity_description);
 
+        mTvTaskdetailActivityDescription.setText(description);
+        mTvTaskdetailActivityPublisher.setText(publisherId);
+        mTvTaskdetailActivityTitle.setText(title);
+
         mBtTaskdetailActivityRecieve.setOnClickListener(this);
+        mIvTaskdetailActivityBack.setOnClickListener(this);
     }
 
     public void onClick(View view){
@@ -129,23 +146,11 @@ public class TaskdetailActivity extends BaseActivity implements View.OnClickList
         }).start();
     }
 
-    /*
-      使用Gson解析response的JSON数据
-      本来总共是有三步的，一、二步在方法调用之前执行了
-    */
     private String getStatus(JsonObject responseBodyJSONObject) {
-        /* 使用Gson解析response的JSON数据的第三步
-           通过JSON对象获取对应的属性值 */
         String status = responseBodyJSONObject.get("status").getAsString();
-        // 登录成功返回的json为{ "status":"success", "data":null }
-        // 只获取status即可，data为null
         return status;
     }
 
-    /*
-      使用Gson解析response返回异常信息的JSON中的data对象
-      这也属于第三步，一、二步在方法调用之前执行了
-     */
     private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
         JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
         String errorCode = dataObject.get("errorCode").getAsString();
@@ -154,4 +159,6 @@ public class TaskdetailActivity extends BaseActivity implements View.OnClickList
         // 在子线程中显示Toast
         showToastInThread(context, errorMsg);
     }
+
+
 }

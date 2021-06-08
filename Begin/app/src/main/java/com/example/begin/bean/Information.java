@@ -3,19 +3,19 @@ package com.example.begin.bean;
 import java.io.Serializable;
 
 public class Information implements Serializable {
-    private String informId;
-    private String informTitle;
-    private String informStatus;
+    private String taskId;
+    private String title;
+    private String content;
 
-    public String getInformId(){return informId;}
+    public String getTaskId(){return taskId;}
 
-    public void setInformId(String informId){this.informId = informId;}
+    public void setTaskId(String taskId){this.taskId = taskId;}
 
-    public String getInformTitle(){return informTitle;}
+    public String getTitle(){return title;}
 
-    public void setInformTitle(String informTitle){this.informTitle = informTitle;}
+    public void setTitle(String title){this.title = title;}
 
-    public String getInformStatus(){return informStatus;}
+    public String getContent(){return content;}
 
-    public void setInformStatus(String informStatus){this.informStatus = informStatus;}
+    public void setContent(String informStatus){this.content = content;}
 }

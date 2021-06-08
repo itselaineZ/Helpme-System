@@ -10,15 +10,17 @@
             android:layout_width="130dp"
             android:layout_height="120dp" app:srcCompat="@drawable/course" android:id="@+id/iv_settingactivity_coursebt"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-    />
+            android:onClick="onClick"/>
     <ImageView
             android:layout_width="130dp"
             android:layout_height="120dp" app:srcCompat="@drawable/task" android:id="@+id/iv_settingactivity_taskbt"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toEndOf="@+id/iv_settingactivity_coursebt"
-    />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_settingactivity_coursebt"
+            android:onClick="onClick"/>
     <ImageView
             android:layout_width="130dp"
             android:layout_height="120dp" app:srcCompat="@drawable/setting" android:id="@+id/iv_settingactivity_userbt"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_settingactivity_taskbt" app:layout_constraintHorizontal_bias="1.0"/>
+            app:layout_constraintStart_toEndOf="@+id/iv_settingactivity_taskbt"
+            app:layout_constraintHorizontal_bias="1.0" android:onClick="onClick"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

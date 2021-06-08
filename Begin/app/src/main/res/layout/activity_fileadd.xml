@@ -11,7 +11,7 @@
             android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back"
             android:id="@+id/iv_fileaddactivity_back"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="28dp" android:layout_marginStart="28dp"/>
+            android:layout_marginTop="28dp" android:layout_marginStart="28dp" android:onClick="onClick"/>
     <Button
             android:text="选择文件"
             android:layout_width="230dp"

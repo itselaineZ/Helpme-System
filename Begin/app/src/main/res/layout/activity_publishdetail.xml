@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:background="@drawable/mainbackground"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+>
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back"
+            android:id="@+id/iv_publishdetailactivity_back"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="28dp" android:layout_marginStart="28dp"/>
+    <TextView
+            android:layout_width="245dp"
+            android:layout_height="46dp" android:id="@+id/tv_publishdetailactivity_title"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="120dp"
+            app:layout_constraintHorizontal_bias="0.497" android:textSize="30sp" android:textColor="#FFFFFF"
+            tools:text="任务标题"/>
+    <TextView
+            android:layout_width="250dp"
+            android:layout_height="435dp" android:id="@+id/tv_publishdetailactivity_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_publishdetailactivity_title"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="28dp" app:layout_constraintHorizontal_bias="0.51" tools:text="任务描述"
+            android:textColor="#FFFFFF" android:textSize="18sp"/>
+    <Button
+            android:text="结束任务"
+            android:layout_width="250dp"
+            android:layout_height="44dp" android:id="@+id/bt_publishdetailactivity_finish"
+            app:layout_constraintTop_toBottomOf="@+id/tv_publishdetailactivity_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="48dp"
+            app:layout_constraintHorizontal_bias="0.51" android:background="#DBA103" android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.027"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

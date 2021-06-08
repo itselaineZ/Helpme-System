@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import com.example.begin.constant.NetConstant;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -16,55 +16,58 @@ import okhttp3.*;
 
 import java.io.IOException;
 
-public class CourseaddActivity extends BaseActivity implements View.OnClickListener{
+public class PublishdetailActivity extends BaseActivity implements View.OnClickListener{
 
-    // 声明SharedPreferences对象
     SharedPreferences sp;
-    // Log打印的通用Tag
-    private final String TAG = "CourseaddActivity";
 
-    private EditText mEtCourseaddActivityCoursename;
-    private EditText mEtCourseaddActivityCourseID;
-    private Button mBtCourseaddActivityAddBt;
-    private ImageView mIvCourseaddActivityBack;
+    private ImageView mIvPublishdetailActivityBack;
+    private TextView mTvPublishdetailActivityTitle;
+    private TextView mTvPublishdetailActivitydescription;
+    private Button mBtPublishdetailActivityFinish;
+    private String taskId;
+    private String title;
+    private String description;
+    private static String TAG = "PublishdetailActivity";
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_courseadd);
+        setContentView(R.layout.activity_publishdetail);
+
+        Bundle bundle = this.getIntent().getExtras();
+        taskId = bundle.getString("taskId");
+        title = bundle.getString("title");
+        description = bundle.getString("description");
 
         initView();
     }
 
     private void initView(){
-        mEtCourseaddActivityCourseID = findViewById(R.id.et_courseaddactivity_courseid);
-        mEtCourseaddActivityCoursename = findViewById(R.id.et_courseaddactivity_coursename);
-        mBtCourseaddActivityAddBt = findViewById(R.id.bt_courseaddactivity_addbt);
-        mIvCourseaddActivityBack = findViewById(R.id.iv_courseaddactivity_back);
+        mIvPublishdetailActivityBack = findViewById(R.id.iv_publishdetailactivity_back);
+        mTvPublishdetailActivityTitle = findViewById(R.id.tv_publishdetailactivity_title);
+        mTvPublishdetailActivitydescription = findViewById(R.id.tv_publishdetailactivity_description);
+        mBtPublishdetailActivityFinish = findViewById(R.id.bt_publishdetailactivity_finish);
 
-        mIvCourseaddActivityBack.setOnClickListener(this);
-        mBtCourseaddActivityAddBt.setOnClickListener(this);
+        mTvPublishdetailActivitydescription.setText(description);
+        mTvPublishdetailActivityTitle.setText(title);
+
+        mIvPublishdetailActivityBack.setOnClickListener(this);
+        mBtPublishdetailActivityFinish.setOnClickListener(this);
     }
 
     public void onClick(View view){
-        switch (view.getId()){
-            case R.id.bt_courseaddactivity_addbt:
-                String coursename = mEtCourseaddActivityCoursename.getText().toString().trim();
-                String coursrid = mEtCourseaddActivityCourseID.getText().toString().trim();
-                asyncCourse(coursename, coursrid);
-                break;
-            case R.id.iv_courseaddactivity_back:
-                startActivity(new Intent(this, CourselistActivity.class));
+        switch(view.getId()){
+            case R.id.iv_publishdetailactivity_back:
+                startActivity(new Intent(this, PublishedtaskActivity.class));
                 finish();
+                break;
+            case R.id.bt_publishdetailactivity_finish:
+                asyncFinish();
                 break;
         }
     }
 
-    private void asyncCourse(final String courseName, final String courseID) {
-        /*
-         发送请求属于耗时操作，所以开辟子线程执行
-         上面的参数都加上了final，否则无法传递到子线程中
-        */
+    private void asyncFinish() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -77,8 +80,7 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
                 OkHttpClient okHttpClient = new OkHttpClient();
                 // 2、构建请求体requestBody
                 RequestBody requestBody = new FormBody.Builder()
-                        .add("name", courseName)
-                        .add("no", courseID)
+                        .add("taskId", taskId)
                         .build();
                 // 3、发送请求，因为要传密码，所以用POST方式
                 Request request = new Request.Builder()
@@ -92,34 +94,26 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
                     @Override
                     public void onFailure(Call call, IOException e) {
                         Log.d(TAG, "请求URL失败： " + e.getMessage());
-                        //showToastInThread(LoginActivity.this, "请求URL失败, 请重试！");
+                        showToastInThread(PublishdetailActivity.this, "请求URL失败, 请重试！");
                     }
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        // 先判断一下服务器是否异常
                         String responseStr = response.toString();
                         if (responseStr.contains("200")) {
-                             /*
-                            注意这里，同一个方法内
-                            response.body().string()只能调用一次，多次调用会报错
-                             */
-                            /* 使用Gson解析response的JSON数据的第一步 */
                             String responseBodyStr = response.body().string();
-                            /* 使用Gson解析response的JSON数据的第二步 */
                             JsonObject responseBodyJSONObject = (JsonObject) new JsonParser().parse(responseBodyStr);
-                            // 如果返回的status为success，则getStatus返回true，登录验证通过
                             if (getStatus(responseBodyJSONObject).equals("success")) {
-                                startActivity(new Intent(CourseaddActivity.this, CourselistActivity.class));
+                                startActivity(new Intent(PublishdetailActivity.this, PublishedtaskActivity.class));
                                 finish();
                             } else {
-                                getResponseErrMsg(CourseaddActivity.this, responseBodyJSONObject);
-                                Log.d(TAG, "课程添加失败");
-                                showToastInThread(CourseaddActivity.this, "课程添加失败");
+                                getResponseErrMsg(PublishdetailActivity.this, responseBodyJSONObject);
+                                Log.d(TAG, "完成任务失败");
+                                showToastInThread(PublishdetailActivity.this, "完成任务失败");
                             }
                         } else {
                             Log.d(TAG, "服务器异常");
-                            showToastInThread(CourseaddActivity.this, "服务器异常");
+                            showToastInThread(PublishdetailActivity.this, "服务器异常");
                         }
                     }
                 });
@@ -128,23 +122,11 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
         }).start();
     }
 
-    /*
-      使用Gson解析response的JSON数据
-      本来总共是有三步的，一、二步在方法调用之前执行了
-    */
     private String getStatus(JsonObject responseBodyJSONObject) {
-        /* 使用Gson解析response的JSON数据的第三步
-           通过JSON对象获取对应的属性值 */
         String status = responseBodyJSONObject.get("status").getAsString();
-        // 登录成功返回的json为{ "status":"success", "data":null }
-        // 只获取status即可，data为null
         return status;
     }
 
-    /*
-      使用Gson解析response返回异常信息的JSON中的data对象
-      这也属于第三步，一、二步在方法调用之前执行了
-     */
     private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
         JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
         String errorCode = dataObject.get("errorCode").getAsString();

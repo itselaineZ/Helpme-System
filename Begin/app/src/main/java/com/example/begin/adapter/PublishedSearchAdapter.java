@@ -8,27 +8,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.begin.activity.PublishdetailActivity;
 import com.example.begin.activity.R;
-import com.example.begin.activity.TaskdetailActivity;
 import com.example.begin.bean.Tasksource;
 
 import java.util.List;
 
-public class TaskSearchAdapter extends RecyclerView.Adapter<TaskSearchAdapter.MyViewHolder> {
+public class PublishedSearchAdapter extends RecyclerView.Adapter<PublishedSearchAdapter.MyViewHolder> {
 
-    private List<Tasksource> taskList;
+    private List<Tasksource> infoList;
 
     //接收参数
-    public TaskSearchAdapter(List<Tasksource> taskList){
-        this.taskList = taskList;
-    }
+    public PublishedSearchAdapter(List<Tasksource> infoList){ this.infoList = infoList; }
 
     @NonNull
     @Override
-    public TaskSearchAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PublishedSearchAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // 填充布局
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_searchtask, parent, false);
-        return new TaskSearchAdapter.MyViewHolder(view);
+        return new PublishedSearchAdapter.MyViewHolder(view);
     }
     /**
      * 创建 ViewHolder
@@ -36,41 +34,38 @@ public class TaskSearchAdapter extends RecyclerView.Adapter<TaskSearchAdapter.My
     static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView mTvTasktitle;
-        TextView mTvTaskPublisherId;
+        TextView mTvTaskRecieverId;
         TextView mTvPersonTitle;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTvTasktitle= itemView.findViewById(R.id.tv_tasktitle);
-            mTvTaskPublisherId = itemView.findViewById(R.id.tv_taskperson);
+            mTvTasktitle = itemView.findViewById(R.id.tv_tasktitle);
+            mTvTaskRecieverId = itemView.findViewById(R.id.tv_taskperson);
             mTvPersonTitle = itemView.findViewById(R.id.tv_persontitle);
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TaskSearchAdapter.MyViewHolder holder, int position) {
-        Tasksource task = taskList.get(position);
+    public void onBindViewHolder(@NonNull PublishedSearchAdapter.MyViewHolder holder, int position) {
+        Tasksource task = infoList.get(position);
 
-        String title = task.getTitle();
-        String person = task.getPublisherName();
         String taskId = task.getId();
+        String title = task.getTitle();
+        String person = task.getReceiverName();
         String description = task.getDescription();
 
-
         holder.mTvTasktitle.setText(title);
-        holder.mTvTaskPublisherId.setText(person);
-        holder.mTvPersonTitle.setText("发布者: ");
+        holder.mTvTaskRecieverId.setText(person);
+        holder.mTvPersonTitle.setText("接收者: ");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("点击了任务项");
                 Bundle bundle = new Bundle();
                 bundle.putString("taskId", taskId);
                 bundle.putString("description", description);
                 bundle.putString("title", title);
-                bundle.putString("publisherId", person);
-                Intent intent = new Intent(v.getContext(), TaskdetailActivity.class);
+                Intent intent = new Intent(v.getContext(), PublishdetailActivity.class);
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
             }
@@ -79,6 +74,6 @@ public class TaskSearchAdapter extends RecyclerView.Adapter<TaskSearchAdapter.My
 
     @Override
     public int getItemCount() {
-        return taskList.size();
+        return infoList.size();
     }
 }
