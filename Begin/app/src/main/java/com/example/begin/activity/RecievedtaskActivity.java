@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
+import com.example.begin.adapter.RecievedSearchAdapter;
 import com.example.begin.adapter.TaskSearchAdapter;
 import com.example.begin.bean.Tasksource;
 import com.example.begin.constant.NetConstant;
@@ -30,7 +31,7 @@ public class RecievedtaskActivity extends BaseActivity implements View.OnClickLi
 
     private ImageView mIvRecievedtaskActivityBack;
     private static RecyclerView rvList;
-    private static TaskSearchAdapter searchAdapter;
+    private static RecievedSearchAdapter searchAdapter;
     private List<Tasksource> taskList = new ArrayList<>();
     private static final String TAG = "RecievedtaskActivity";
 
@@ -63,7 +64,7 @@ public class RecievedtaskActivity extends BaseActivity implements View.OnClickLi
             rvList.removeAllViews();
             return;
         }
-        searchAdapter = new TaskSearchAdapter(taskList);
+        searchAdapter = new RecievedSearchAdapter(taskList);
         rvList.setAdapter(searchAdapter);
         searchAdapter.notifyDataSetChanged();
     }

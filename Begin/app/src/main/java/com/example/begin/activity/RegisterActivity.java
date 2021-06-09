@@ -65,7 +65,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView(){
-        mBtRegisteractivityRegister = findViewById(R.id.bt_registeractivity_register);
+        mBtRegisteractivityRegister = findViewById(R.id.bt_registeractivity_submit);
         mRlRegisteractivityTop = findViewById(R.id.rl_registeractivity_top);
         mIvRegisteractivityBack = findViewById(R.id.iv_registeractivity_back);
         mLlRegisteractivityBody = findViewById(R.id.ll_registeractivity_body);
@@ -92,14 +92,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 mIvRegisteractivityShowcode.setImageBitmap(Code.getInstance().createBitmap());
                 realCode = Code.getInstance().getCode().toLowerCase();
                 break;
-            case R.id.bt_registeractivity_register:    //注册按钮
+            case R.id.bt_registeractivity_submit:    //注册按钮
                 //获取用户输入的用户名、密码、验证码
                 String username = mEtRegisteractivityUsername.getText().toString().trim();
                 String email = mEtRegisteractivityEmail.getText().toString().trim();
                 String password1 = mEtRegisteractivityPassword1.getText().toString().trim();
                 String password2 = mEtRegisteractivityPassword2.getText().toString().trim();
                 //需要实现两次密码是否相同的比较
-                if(password1 != password2){
+                if(!password1.equals(password2)){
                     Toast.makeText(this, "两次输入的密码不一致，注册失败", Toast.LENGTH_SHORT).show();
                     break;
                 }

@@ -115,7 +115,7 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
             try
             {
                 ResponseBody responseBody = okhttp.newCall(
-                        new Request.Builder().post(body).url("http://192.168.1.3:8080/kr/upload").build()
+                        new Request.Builder().post(body).url(NetConstant.getFileAddURL()).build()
                 ).execute().body();
 
                 if(responseBody != null)

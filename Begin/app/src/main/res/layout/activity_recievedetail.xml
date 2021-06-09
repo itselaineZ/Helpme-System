@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="@drawable/mainbackground">
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back" android:id="@+id/iv_recievedetailactivity_back"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="28dp" android:layout_marginStart="28dp"/>
+    <TextView
+            android:layout_width="252dp"
+            android:layout_height="46dp" android:id="@+id/tv_recievedetailactivity_title"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="116dp"
+            app:layout_constraintHorizontal_bias="0.496" tools:text="任务标题" android:textSize="30sp"
+            android:textColor="#FFFFFF"/>
+    <TextView
+            android:layout_width="268dp"
+            android:layout_height="428dp" android:id="@+id/tv_recievedetailactivity_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recievedetailactivity_title"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="64dp" app:layout_constraintHorizontal_bias="0.497" android:textSize="24sp"
+            android:textColor="#FFFFFF" tools:text="任务描述"/>
+    <Button
+            android:text="完成任务"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/bt_recievedetailactivity_finish"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recievedetailactivity_description"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="36dp" android:layout_marginStart="68dp" android:textColor="#FFFFFF"
+            android:background="#DBA103"/>
+    <Button
+            android:text="放弃任务"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/bt_recievedetailactivity_giveup"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recievedetailactivity_description"
+            app:layout_constraintStart_toEndOf="@+id/bt_recievedetailactivity_finish" android:layout_marginTop="36dp"
+            android:layout_marginStart="84dp" android:textColor="#FFFFFF" android:background="#DBA103"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

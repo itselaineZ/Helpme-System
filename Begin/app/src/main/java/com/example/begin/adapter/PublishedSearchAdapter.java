@@ -49,7 +49,7 @@ public class PublishedSearchAdapter extends RecyclerView.Adapter<PublishedSearch
     public void onBindViewHolder(@NonNull PublishedSearchAdapter.MyViewHolder holder, int position) {
         Tasksource task = infoList.get(position);
 
-        String taskId = task.getId();
+        long taskId = task.getId();
         String title = task.getTitle();
         String person = task.getReceiverName();
         String description = task.getDescription();
@@ -62,7 +62,7 @@ public class PublishedSearchAdapter extends RecyclerView.Adapter<PublishedSearch
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("taskId", taskId);
+                bundle.putString("taskId", String.valueOf(taskId));
                 bundle.putString("description", description);
                 bundle.putString("title", title);
                 Intent intent = new Intent(v.getContext(), PublishdetailActivity.class);

@@ -116,7 +116,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener{
             OkHttpClient client = new OkHttpClient();
 
             RequestBody requestBody = new FormBody.Builder()
-                    .add("CourseName", courseName)
+                    .add("courseName", courseName)
                     .build();
 
             Request request = new Request.Builder()

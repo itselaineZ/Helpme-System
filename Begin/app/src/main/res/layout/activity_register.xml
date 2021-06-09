@@ -145,17 +145,11 @@
 
     </LinearLayout>
     <Button
-            android:id="@+id/bt_registeractivity_register"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="86dp"
-            android:background="#DBA103"
-            android:onClick="onClick"
             android:text="注册"
-            android:textColor="#fff" android:layout_alignParentEnd="true" android:layout_marginEnd="21dp"
-            android:layout_alignParentStart="true" android:layout_marginStart="17dp"
-            android:layout_below="@+id/ll_registeractivity_body" android:layout_alignParentBottom="true"
-            android:layout_marginBottom="251dp"/>
+            android:layout_width="338dp"
+            android:layout_height="wrap_content" android:id="@+id/bt_registeractivity_submit"
+            android:layout_alignParentEnd="true" android:layout_marginEnd="33dp" android:layout_marginTop="65dp"
+            android:layout_below="@+id/ll_registeractivity_body" android:layout_alignParentStart="true"
+            android:layout_marginStart="22dp" android:background="#DBA103" android:textColor="#FFFFFF"/>
 
 </RelativeLayout>

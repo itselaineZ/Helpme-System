@@ -100,7 +100,7 @@ public class TaskdetailActivity extends BaseActivity implements View.OnClickList
                         .build();
                 // 3、发送请求，因为要传密码，所以用POST方式
                 Request request = new Request.Builder()
-                        .url(NetConstant.getLoginURL())
+                        .url(NetConstant.getTaskDetailURL())
                         .addHeader("Authorization", token)
                         .post(requestBody)
                         .build();

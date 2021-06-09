@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -195,8 +196,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     showToastInThread(LoginActivity.this, "token保存失败，请重新登录");
                                 }
                             } else {
-                                getResponseErrMsg(LoginActivity.this, responseBodyJSONObject);
+                                //getResponseErrMsg(LoginActivity.this, responseBodyJSONObject);
                                 Log.d(TAG, "账号或密码验证失败");
+                                showToastInThread(LoginActivity.this, "帐号或密码验证失败");
                             }
                         } else {
                             Log.d(TAG, "服务器异常");
@@ -231,11 +233,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
       这也属于第三步，一、二步在方法调用之前执行了
      */
     private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
+        /*
         JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
         String errorCode = dataObject.get("errorCode").getAsString();
         String errorMsg = dataObject.get("errorMsg").getAsString();
         Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
         // 在子线程中显示Toast
-        showToastInThread(context, errorMsg);
+        showToastInThread(context, errorMsg);*/
     }
 }

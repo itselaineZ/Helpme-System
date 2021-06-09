@@ -77,7 +77,7 @@ public class ReleaseActivity extends BaseActivity implements View.OnClickListene
                         .build();
                 // 3、发送请求，因为要传密码，所以用POST方式
                 Request request = new Request.Builder()
-                        .url(NetConstant.getLoginURL())
+                        .url(NetConstant.getReleaseURL())
                         .addHeader("Authorization", token)
                         .post(requestBody)
                         .build();
@@ -95,11 +95,6 @@ public class ReleaseActivity extends BaseActivity implements View.OnClickListene
                         // 先判断一下服务器是否异常
                         String responseStr = response.toString();
                         if (responseStr.contains("200")) {
-                             /*
-                            注意这里，同一个方法内
-                            response.body().string()只能调用一次，多次调用会报错
-                             */
-                            /* 使用Gson解析response的JSON数据的第一步 */
                             String responseBodyStr = response.body().string();
                             /* 使用Gson解析response的JSON数据的第二步 */
                             JsonObject responseBodyJSONObject = (JsonObject) new JsonParser().parse(responseBodyStr);
@@ -108,7 +103,6 @@ public class ReleaseActivity extends BaseActivity implements View.OnClickListene
                                 startActivity(new Intent(ReleaseActivity.this, TaskActivity.class));
                                 finish();
                             } else {
-                                getResponseErrMsg(ReleaseActivity.this, responseBodyJSONObject);
                                 Log.d(TAG, "任务发布失败");
                                 showToastInThread(ReleaseActivity.this, "任务发布失败");
                             }

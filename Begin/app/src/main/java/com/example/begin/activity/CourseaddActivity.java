@@ -77,12 +77,12 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
                 OkHttpClient okHttpClient = new OkHttpClient();
                 // 2、构建请求体requestBody
                 RequestBody requestBody = new FormBody.Builder()
-                        .add("name", courseName)
-                        .add("no", courseID)
+                        .add("courseName", courseName)
+                        .add("courseID", courseID)
                         .build();
                 // 3、发送请求，因为要传密码，所以用POST方式
                 Request request = new Request.Builder()
-                        .url(NetConstant.getLoginURL())
+                        .url(NetConstant.getCourseAddURL())
                         .addHeader("Authorization", token)
                         .post(requestBody)
                         .build();
@@ -113,7 +113,6 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
                                 startActivity(new Intent(CourseaddActivity.this, CourselistActivity.class));
                                 finish();
                             } else {
-                                getResponseErrMsg(CourseaddActivity.this, responseBodyJSONObject);
                                 Log.d(TAG, "课程添加失败");
                                 showToastInThread(CourseaddActivity.this, "课程添加失败");
                             }

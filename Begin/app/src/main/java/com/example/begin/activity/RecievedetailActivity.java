@@ -16,23 +16,24 @@ import okhttp3.*;
 
 import java.io.IOException;
 
-public class PublishdetailActivity extends BaseActivity implements View.OnClickListener{
+public class RecievedetailActivity extends BaseActivity implements View.OnClickListener{
 
     SharedPreferences sp;
 
-    private ImageView mIvPublishdetailActivityBack;
-    private TextView mTvPublishdetailActivityTitle;
-    private TextView mTvPublishdetailActivitydescription;
-    private Button mBtPublishdetailActivityFinish;
+    private ImageView mIvRecievedetailActivityBack;
+    private TextView mTvRecievedetailActivityTitle;
+    private TextView mTvRecievedetailActivityDescription;
+    private Button mBtRecievedetailActivityFinish;
+    private Button mBtRecievedetailActivityGiveup;
     private String taskId;
     private String title;
     private String description;
-    private static String TAG = "PublishdetailActivity";
+    private static String TAG = "RecievedetailActivity";
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_publishdetail);
+        setContentView(R.layout.activity_recievedetail);
 
         Bundle bundle = this.getIntent().getExtras();
         taskId = bundle.getString("taskId");
@@ -43,31 +44,36 @@ public class PublishdetailActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initView(){
-        mIvPublishdetailActivityBack = findViewById(R.id.iv_publishdetailactivity_back);
-        mTvPublishdetailActivityTitle = findViewById(R.id.tv_publishdetailactivity_title);
-        mTvPublishdetailActivitydescription = findViewById(R.id.tv_publishdetailactivity_description);
-        mBtPublishdetailActivityFinish = findViewById(R.id.bt_publishdetailactivity_finish);
+        mIvRecievedetailActivityBack = findViewById(R.id.iv_recievedetailactivity_back);
+        mTvRecievedetailActivityTitle = findViewById(R.id.tv_recievedetailactivity_title);
+        mTvRecievedetailActivityDescription = findViewById(R.id.tv_recievedetailactivity_description);
+        mBtRecievedetailActivityFinish = findViewById(R.id.bt_recievedetailactivity_finish);
+        mBtRecievedetailActivityGiveup = findViewById(R.id.bt_recievedetailactivity_giveup);
 
-        mTvPublishdetailActivitydescription.setText(description);
-        mTvPublishdetailActivityTitle.setText(title);
+        mTvRecievedetailActivityTitle.setText(title);
+        mTvRecievedetailActivityDescription.setText(description);
 
-        mIvPublishdetailActivityBack.setOnClickListener(this);
-        mBtPublishdetailActivityFinish.setOnClickListener(this);
+        mBtRecievedetailActivityGiveup.setOnClickListener(this);
+        mBtRecievedetailActivityFinish.setOnClickListener(this);
+        mIvRecievedetailActivityBack.setOnClickListener(this);
     }
 
     public void onClick(View view){
         switch(view.getId()){
-            case R.id.iv_publishdetailactivity_back:
-                startActivity(new Intent(this, PublishedtaskActivity.class));
+            case R.id.iv_recievedetailactivity_back:
+                startActivity(new Intent(this, RecievedtaskActivity.class));
                 finish();
                 break;
-            case R.id.bt_publishdetailactivity_finish:
-                asyncFinish();
+            case R.id.bt_recievedetailactivity_finish:
+                asyncPost(NetConstant.getFinishByReceiverURL());
+                break;
+            case R.id.bt_recievedetailactivity_giveup:
+                asyncPost(NetConstant.getGiveUpURL());
                 break;
         }
     }
 
-    private void asyncFinish() {
+    private void asyncPost(final String URL) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -84,7 +90,7 @@ public class PublishdetailActivity extends BaseActivity implements View.OnClickL
                         .build();
                 // 3、发送请求，因为要传密码，所以用POST方式
                 Request request = new Request.Builder()
-                        .url(NetConstant.getFinishByPublisherURL())
+                        .url(URL)
                         .addHeader("Authorization", token)
                         .post(requestBody)
                         .build();
@@ -94,7 +100,7 @@ public class PublishdetailActivity extends BaseActivity implements View.OnClickL
                     @Override
                     public void onFailure(Call call, IOException e) {
                         Log.d(TAG, "请求URL失败： " + e.getMessage());
-                        showToastInThread(PublishdetailActivity.this, "请求URL失败, 请重试！");
+                        showToastInThread(RecievedetailActivity.this, "请求URL失败, 请重试！");
                     }
 
                     @Override
@@ -104,16 +110,17 @@ public class PublishdetailActivity extends BaseActivity implements View.OnClickL
                             String responseBodyStr = response.body().string();
                             JsonObject responseBodyJSONObject = (JsonObject) new JsonParser().parse(responseBodyStr);
                             if (getStatus(responseBodyJSONObject).equals("success")) {
-                                startActivity(new Intent(PublishdetailActivity.this, PublishedtaskActivity.class));
+                                showToastInThread(RecievedetailActivity.this, "操作成功");
+                                startActivity(new Intent(RecievedetailActivity.this, RecievedtaskActivity.class));
                                 finish();
                             } else {
-                                getResponseErrMsg(PublishdetailActivity.this, responseBodyJSONObject);
-                                Log.d(TAG, "完成任务失败");
-                                showToastInThread(PublishdetailActivity.this, "完成任务失败");
+                                getResponseErrMsg(RecievedetailActivity.this, responseBodyJSONObject);
+                                Log.d(TAG, "操作失败");
+                                showToastInThread(RecievedetailActivity.this, "操作失败");
                             }
                         } else {
                             Log.d(TAG, "服务器异常");
-                            showToastInThread(PublishdetailActivity.this, "服务器异常");
+                            showToastInThread(RecievedetailActivity.this, "服务器异常");
                         }
                     }
                 });

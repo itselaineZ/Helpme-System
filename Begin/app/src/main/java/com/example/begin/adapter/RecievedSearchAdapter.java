@@ -9,26 +9,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.begin.activity.R;
+import com.example.begin.activity.RecievedetailActivity;
 import com.example.begin.activity.TaskdetailActivity;
 import com.example.begin.bean.Tasksource;
 
 import java.util.List;
 
-public class TaskSearchAdapter extends RecyclerView.Adapter<TaskSearchAdapter.MyViewHolder> {
+public class RecievedSearchAdapter extends RecyclerView.Adapter<RecievedSearchAdapter.MyViewHolder> {
 
     private List<Tasksource> taskList;
 
     //接收参数
-    public TaskSearchAdapter(List<Tasksource> taskList){
+    public RecievedSearchAdapter(List<Tasksource> taskList){
         this.taskList = taskList;
     }
 
     @NonNull
     @Override
-    public TaskSearchAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecievedSearchAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // 填充布局
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_searchtask, parent, false);
-        return new TaskSearchAdapter.MyViewHolder(view);
+        return new RecievedSearchAdapter.MyViewHolder(view);
     }
     /**
      * 创建 ViewHolder
@@ -48,7 +49,7 @@ public class TaskSearchAdapter extends RecyclerView.Adapter<TaskSearchAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TaskSearchAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecievedSearchAdapter.MyViewHolder holder, int position) {
         Tasksource task = taskList.get(position);
 
         String title = task.getTitle();
@@ -70,7 +71,7 @@ public class TaskSearchAdapter extends RecyclerView.Adapter<TaskSearchAdapter.My
                 bundle.putString("description", description);
                 bundle.putString("title", title);
                 bundle.putString("publisherId", person);
-                Intent intent = new Intent(v.getContext(), TaskdetailActivity.class);
+                Intent intent = new Intent(v.getContext(), RecievedetailActivity.class);
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
             }

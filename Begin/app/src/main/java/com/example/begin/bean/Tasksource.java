@@ -3,15 +3,15 @@ package com.example.begin.bean;
 import java.io.Serializable;
 
 public class Tasksource implements Serializable {
-    private String id;
+    private long id;
     private String title;
     private String publisherName;
     private String receiverName;
     private String description;
 
-    public String getId(){return id;}
+    public long getId(){return id;}
 
-    public void setId(String id){this.id = id;}
+    public void setId(long id){this.id = id;}
 
     public String getTitle(){return title;}
 
