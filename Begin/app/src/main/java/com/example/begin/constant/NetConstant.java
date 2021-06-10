@@ -26,7 +26,7 @@ public class NetConstant {
 
     private static final String RecievedTaskURL     = "/task/myReceive";
 
-    private static final String TaskDetailURL       = "/task/detail";
+    private static final String TaskDetailURL       = "/task/receive";
 
     private static final String PublishedTaskURL    = "/task/myPublish";
 

@@ -55,7 +55,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private Button mBtLoginactivityLogin;
     private Button mBtLoginactivityRegister;
     private Button mBtLoginactivityCue;
-    private Button mbtLoginactivityFindpassword;
     private EditText mEtLoginactivityUsername;
     private EditText mEtLoginactivityPassword;
     private EditText mEtLoginactivityInputcodes;
@@ -78,7 +77,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mBtLoginactivityLogin = findViewById(R.id.bt_loginactivity_login);
         mBtLoginactivityRegister = findViewById(R.id.bt_loginactivity_register);
         mBtLoginactivityCue = findViewById(R.id.bt_loginactivity_cue);
-        mbtLoginactivityFindpassword = findViewById(R.id.bt_loginactivity_findpassword);
         mEtLoginactivityUsername = findViewById(R.id.et_loginactivity_username);
         mEtLoginactivityPassword = findViewById(R.id.et_loginactivity_password);
         mEtLoginactivityInputcodes = findViewById(R.id.et_loginactivity_inputcodes);
@@ -87,7 +85,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         // 设置点击事件监听器
         mBtLoginactivityLogin.setOnClickListener(this);
         mBtLoginactivityRegister.setOnClickListener(this);
-        mbtLoginactivityFindpassword.setOnClickListener(this);
         mBtLoginactivityCue.setOnClickListener(this);
         mIvLoginactivityShowcode.setOnClickListener(this);
     }
@@ -116,10 +113,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
             case R.id.bt_loginactivity_cue:
                 startActivity(new Intent(this, CueActivity.class));
-                finish();
-                break;
-            case R.id.bt_loginactivity_findpassword:
-                startActivity(new Intent(this, FindpasswordActivity.class));
                 finish();
                 break;
             case R.id.iv_loginactivity_Showcodes:

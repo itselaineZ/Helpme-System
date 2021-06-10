@@ -10,10 +10,10 @@
             android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back" android:id="@+id/iv_publishedtaskactivity_back"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"/>
     <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="391dp"
-            android:layout_height="725dp"
+            android:layout_width="match_parent"
+            android:layout_height="640dp"
             app:layout_constraintTop_toBottomOf="@+id/iv_publishedtaskactivity_back"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.461"
             app:layout_constraintVertical_bias="0.0" android:id="@+id/rv_publishedtaskactivity_list"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

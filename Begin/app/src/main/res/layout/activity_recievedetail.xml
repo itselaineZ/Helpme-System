@@ -22,7 +22,7 @@
             android:layout_height="428dp" android:id="@+id/tv_recievedetailactivity_description"
             app:layout_constraintTop_toBottomOf="@+id/tv_recievedetailactivity_title"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="64dp" app:layout_constraintHorizontal_bias="0.497" android:textSize="24sp"
+            android:layout_marginTop="32dp" app:layout_constraintHorizontal_bias="0.496" android:textSize="24sp"
             android:textColor="#FFFFFF" tools:text="任务描述"/>
     <Button
             android:text="完成任务"

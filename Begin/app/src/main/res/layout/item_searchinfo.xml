@@ -13,12 +13,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/guideline8" app:layout_constraintGuide_end="4dp"/>
     <TextView
-            android:layout_width="296dp"
-            android:layout_height="48dp" android:id="@+id/tv_infotitle"
+            android:layout_width="248dp"
+            android:layout_height="45dp" android:id="@+id/tv_infotitle"
             app:layout_constraintTop_toTopOf="@+id/guideline7" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9" app:layout_constraintBottom_toTopOf="@+id/guideline8"
+            app:layout_constraintBottom_toTopOf="@+id/guideline8"
             tools:text="任务标题" android:textSize="30sp" android:textColor="#FFFFFF" android:background="#00FFFFFF"
-            app:layout_constraintHorizontal_bias="0.313" app:layout_constraintVertical_bias="0.6"/>
+            app:layout_constraintVertical_bias="0.6" app:layout_constraintEnd_toStartOf="@+id/guideline9"/>
     <androidx.constraintlayout.widget.Guideline
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -35,7 +35,8 @@
             android:layout_width="82dp"
             android:layout_height="25dp" android:id="@+id/tv_taskstatus"
             android:textColor="#FFFFFF" android:textSize="18sp"
-            android:background="#00FFFFFF" tools:text="任务状态" app:layout_constraintStart_toEndOf="@+id/tv_infotitle"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.915"
-            app:layout_constraintBottom_toTopOf="@+id/guideline8" app:layout_constraintTop_toBottomOf="@+id/textView5"/>
+            android:background="#00FFFFFF" tools:text="任务状态"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/guideline8" app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

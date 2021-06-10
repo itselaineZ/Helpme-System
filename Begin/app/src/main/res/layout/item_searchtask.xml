@@ -13,8 +13,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/guideline11" app:layout_constraintGuide_end="4dp"/>
     <TextView
-            android:layout_width="219dp"
-            android:layout_height="45dp" android:id="@+id/tv_tasktitle"
+            android:layout_width="228dp"
+            android:layout_height="47dp" android:id="@+id/tv_tasktitle"
             tools:text="任务标题" android:textSize="30sp" android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"

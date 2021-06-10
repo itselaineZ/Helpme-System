@@ -18,13 +18,13 @@
             android:layout_marginTop="28dp" android:layout_alignParentTop="true"/>
     <LinearLayout
             android:id="@+id/ll_registeractivity_body"
-            android:layout_width="358dp"
-            android:layout_height="266dp"
+            android:layout_width="367dp"
+            android:layout_height="269dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:orientation="vertical"
             android:layout_alignParentStart="true" android:layout_marginStart="14dp" android:layout_marginTop="243dp"
-            android:layout_alignParentTop="true" android:layout_alignParentEnd="true" android:layout_marginEnd="21dp">
+            android:layout_alignParentTop="true" android:layout_alignParentEnd="true" android:layout_marginEnd="12dp">
         <!-- 第一个文本编辑框  输入用户名 -->
         <LinearLayout
                 android:layout_width="match_parent"
@@ -32,17 +32,17 @@
                 android:orientation="horizontal">
 
             <TextView
-                    android:text="用户名:"
+                    android:text="用户名："
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_weight="1"
+                    android:layout_height="wrap_content" android:id="@+id/tv_this"
                     android:textColor="#FFFFFF"/>
             <EditText
-                    android:layout_width="301dp"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/et_registeractivity_username" android:textColor="#FFFFFF" android:hint="请输入用户名"
-                    android:textColorHint="#FFFFFF"/>
+                    android:textColorHint="#FFFFFF" android:layout_marginLeft="10dp"/>
         </LinearLayout>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -51,13 +51,13 @@
 
             <TextView
                     android:id="@+id/tv_cueactivity_email"
-                    android:layout_width="57dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="邮    箱：" android:textColor="#FFFFFF"/>
 
             <EditText
                     android:id="@+id/et_registeractivity_email"
-                    android:layout_width="309dp"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
@@ -77,7 +77,7 @@
 
             <EditText
                     android:id="@+id/et_registeractivity_password1"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
@@ -85,6 +85,7 @@
                     android:inputType="textPassword" android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
         </LinearLayout>
         <!-- 第三个文本编辑框  再次输入密码 -->
+        <!-- 验证码部分 -->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,14 +99,13 @@
 
             <EditText
                     android:id="@+id/et_registeractivity_password2"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
                     android:hint="请再次输入密码"
                     android:inputType="textPassword" android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
         </LinearLayout>
-        <!-- 验证码部分 -->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
             <!-- 第四个文本编辑框  输入验证码 -->
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
                 <TextView
                         android:id="@+id/tv_registeractivity_codes"
@@ -124,7 +124,7 @@
                         android:text="验证码：" android:textColor="#FFFFFF"/>
                 <EditText
                         android:id="@+id/et_registeractivity_inputcodes"
-                        android:layout_width="0dp"
+                        android:layout_width="100dp"
                         android:layout_weight="3"
                         android:layout_height="50dp"
                         android:layout_marginLeft="10dp"
@@ -133,8 +133,8 @@
 
                 <ImageView
                         android:id="@+id/iv_registeractivity_showcode"
-                        android:layout_width="0dp"
-                        android:layout_height="70dp"
+                        android:layout_width="97dp"
+                        android:layout_height="76dp"
                         android:layout_marginTop="-10dp"
                         android:layout_weight="1.5"
                         android:clickable="true"

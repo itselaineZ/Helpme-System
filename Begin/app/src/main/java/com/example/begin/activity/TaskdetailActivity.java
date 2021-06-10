@@ -131,9 +131,8 @@ public class TaskdetailActivity extends BaseActivity implements View.OnClickList
                                 startActivity(new Intent(TaskdetailActivity.this, RecievelistActivity.class));
                                 finish();
                             } else {
-                                getResponseErrMsg(TaskdetailActivity.this, responseBodyJSONObject);
-                                Log.d(TAG, "课程添加失败");
-                                showToastInThread(TaskdetailActivity.this, "课程添加失败");
+                                Log.d(TAG, "接收任务失败");
+                                showToastInThread(TaskdetailActivity.this, "接受任务失败");
                             }
                         } else {
                             Log.d(TAG, "服务器异常");
@@ -151,14 +150,6 @@ public class TaskdetailActivity extends BaseActivity implements View.OnClickList
         return status;
     }
 
-    private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
-        JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
-        String errorCode = dataObject.get("errorCode").getAsString();
-        String errorMsg = dataObject.get("errorMsg").getAsString();
-        Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
-        // 在子线程中显示Toast
-        showToastInThread(context, errorMsg);
-    }
 
 
 }
