@@ -174,12 +174,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                              这里的telphone和password每次都要重写的
                              否则无法实现修改密码
                             */
+                                String username = responseBodyJSONObject.get("username").getAsString();
                                 final String token = getToken(responseBodyJSONObject);
                                 sp = getSharedPreferences("login_info", MODE_PRIVATE);
                                 editor = sp.edit();
                                 editor.putString("token", token);
                                 editor.putString("email", email);
                                 editor.putString("password", password);
+                                editor.putString("username", username);
                                 if (editor.commit()) {
                                     Intent it_login_to_main = new Intent(LoginActivity.this, CourselistActivity.class);
                                     startActivity(it_login_to_main);

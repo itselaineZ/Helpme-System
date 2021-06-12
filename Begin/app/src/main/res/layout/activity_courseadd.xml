@@ -16,23 +16,14 @@
             android:layout_marginTop="164dp" android:hint="请输入课程名称"
             android:textColor="#FFFFFF" android:textColorHint="#FFFFFF" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/et_courseaddactivity_courseid"
-            app:layout_constraintTop_toBottomOf="@+id/et_courseaddactivity_coursename"
-            android:layout_marginTop="36dp" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:hint="请输入课号" android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"/>
     <Button
             android:text="确认添加"
             android:layout_width="223dp"
             android:layout_height="40dp" android:id="@+id/bt_courseaddactivity_addbt"
-            app:layout_constraintTop_toBottomOf="@+id/et_courseaddactivity_courseid" android:layout_marginTop="124dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="84dp"
-            android:background="#DBA103" android:textColor="#FFFFFF"/>
+            android:background="#DBA103" android:textColor="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@+id/et_courseaddactivity_coursename"
+            android:layout_marginTop="180dp"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:srcCompat="@drawable/ic_left_back"

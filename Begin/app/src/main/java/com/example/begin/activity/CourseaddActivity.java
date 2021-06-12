@@ -37,7 +37,7 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initView(){
-        mEtCourseaddActivityCourseID = findViewById(R.id.et_courseaddactivity_courseid);
+        //mEtCourseaddActivityCourseID = findViewById(R.id.et_courseaddactivity_courseid);
         mEtCourseaddActivityCoursename = findViewById(R.id.et_courseaddactivity_coursename);
         mBtCourseaddActivityAddBt = findViewById(R.id.bt_courseaddactivity_addbt);
         mIvCourseaddActivityBack = findViewById(R.id.iv_courseaddactivity_back);
@@ -78,7 +78,6 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
                 // 2、构建请求体requestBody
                 RequestBody requestBody = new FormBody.Builder()
                         .add("courseName", courseName)
-                        .add("courseID", courseID)
                         .build();
                 // 3、发送请求，因为要传密码，所以用POST方式
                 Request request = new Request.Builder()

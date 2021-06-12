@@ -68,7 +68,7 @@ public class RecievedetailActivity extends BaseActivity implements View.OnClickL
                 asyncPost(NetConstant.getFinishByReceiverURL());
                 break;
             case R.id.bt_recievedetailactivity_giveup:
-                asyncPost(NetConstant.getGiveUpURL());
+                asyncPost(NetConstant.getReceiverGiveUpURL());
                 break;
         }
     }

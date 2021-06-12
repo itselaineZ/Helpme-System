@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.*;
 import androidx.core.app.ActivityCompat;
 import com.example.begin.constant.NetConstant;
+import com.example.begin.util.FileChooseUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import okhttp3.*;
@@ -55,8 +56,6 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
         mBtFileaddActivityChoose = findViewById(R.id.bt_fileaddactivity_choose);
         mBtFileaddActivityUpload = findViewById(R.id.bt_fileaddactivity_upload);
 
-        mBtFileaddActivityChoose.setOnClickListener(this);
-        mBtFileaddActivityUpload.setOnClickListener(this);
         mIvFileaddActivityBack.setOnClickListener(this);
 
         mBtFileaddActivityChoose.setOnClickListener(v-> {
@@ -69,8 +68,7 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    public void chooseFile()
-    {
+    public void chooseFile() {
         String [] permissions = new String[]{
                 "android.permission.READ_EXTERNAL_STORAGE"
         };//所需权限
@@ -85,59 +83,55 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
     }
 
     @Override
-    public void onActivityResult(int requestCode,int resultCode,Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK)
-        {
+    public void onActivityResult(int requestCode,int resultCode,Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode==RESULT_OK){
             Uri uri = data.getData();
-            File dir = getExternalFilesDir(null);
-            if(dir != null)
-            {
-                path = dir.toString().substring(0,dir.toString().indexOf("0")+2) +
-                        DocumentsContract.getDocumentId(uri).split(":")[1];
-            }
+            String chooseFilePath = FileChooseUtil.getInstance(this).getChooseFileResultPath(uri);
+            Log.d(TAG,"选择文件返回：" + chooseFilePath);
+            path = chooseFilePath;
+            //sendFileMessage(chooseFilePath);
         }
     }
 
-    public boolean uploadFile(String path,String filename)
-    {
+    public boolean uploadFile(String path,String filename) {
         OkHttpClient okhttp = new OkHttpClient();
         File file = new File(path);
         if(path.isEmpty() || !file.exists())
             return false;
         RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("file",filename,RequestBody.create(new File(path), MediaType.parse("multipart/form-data")))
-                .addFormDataPart("filename",filename)
+                .addFormDataPart("courseMaterial",filename,RequestBody.create(file, MediaType.parse("multipart/form-data")))
+                //.addFormDataPart("courseMaterial",filename,RequestBody.create(MEDIA_OBJECT_STREAM, file))
+                .addFormDataPart("courseMaterialName",filename)
+                .addFormDataPart("courseName", courseName)
                 .build();
-        FutureTask<Boolean> task = new FutureTask<>(()->
-        {
+
+        sp = getSharedPreferences("login_info", MODE_PRIVATE);
+        final String token = sp.getString("token", "ERROR");
+
+        Request request = new Request.Builder()
+                .url(NetConstant.getFileAddURL())
+                .addHeader("Authorization", token)
+                .post(body)
+                .build();
+
             try
             {
-                ResponseBody responseBody = okhttp.newCall(
-                        new Request.Builder().post(body).url(NetConstant.getFileAddURL()).build()
-                ).execute().body();
+                ResponseBody responseBody = okhttp.newCall(request).execute().body();
 
-                if(responseBody != null)
-                    return Boolean.parseBoolean(responseBody.string());
-                return false;
+                String jsonStr = responseBody.string();
+                JsonObject jsonObject = (JsonObject) new JsonParser().parse(jsonStr);
+                String status = jsonObject.get("status").getAsString();
+                if(status.equals("success"))
+                    return true;
+                else return false;
             }
             catch (IOException e)
             {
                 return false;
             }
-        });
-        try
-        {
-            new Thread(task).start();
-            return task.get();
         }
-        catch (ExecutionException | InterruptedException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-    }
+
 
     public void showMessage(String message)
     {

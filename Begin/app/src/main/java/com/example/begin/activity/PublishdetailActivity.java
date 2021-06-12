@@ -24,6 +24,7 @@ public class PublishdetailActivity extends BaseActivity implements View.OnClickL
     private TextView mTvPublishdetailActivityTitle;
     private TextView mTvPublishdetailActivitydescription;
     private Button mBtPublishdetailActivityFinish;
+    private Button mBtPublishdetailActivityGiveUp;
     private String taskId;
     private String title;
     private String description;
@@ -47,12 +48,14 @@ public class PublishdetailActivity extends BaseActivity implements View.OnClickL
         mTvPublishdetailActivityTitle = findViewById(R.id.tv_publishdetailactivity_title);
         mTvPublishdetailActivitydescription = findViewById(R.id.tv_publishdetailactivity_description);
         mBtPublishdetailActivityFinish = findViewById(R.id.bt_publishdetailactivity_finish);
+        mBtPublishdetailActivityGiveUp = findViewById(R.id.bt_publishdetailactivity_giveup);
 
         mTvPublishdetailActivitydescription.setText(description);
         mTvPublishdetailActivityTitle.setText(title);
 
         mIvPublishdetailActivityBack.setOnClickListener(this);
         mBtPublishdetailActivityFinish.setOnClickListener(this);
+        mBtPublishdetailActivityGiveUp.setOnClickListener(this);
     }
 
     public void onClick(View view){
@@ -62,12 +65,15 @@ public class PublishdetailActivity extends BaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.bt_publishdetailactivity_finish:
-                asyncFinish();
+                asyncFinish(NetConstant.getFinishByPublisherURL());
+                break;
+            case R.id.bt_publishdetailactivity_giveup:
+                asyncFinish(NetConstant.getPublisherGiveUpURL());
                 break;
         }
     }
 
-    private void asyncFinish() {
+    private void asyncFinish(final String URL) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -84,7 +90,7 @@ public class PublishdetailActivity extends BaseActivity implements View.OnClickL
                         .build();
                 // 3、发送请求，因为要传密码，所以用POST方式
                 Request request = new Request.Builder()
-                        .url(NetConstant.getFinishByPublisherURL())
+                        .url(URL)
                         .addHeader("Authorization", token)
                         .post(requestBody)
                         .build();

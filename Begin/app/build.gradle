@@ -41,6 +41,7 @@ dependencies {
     implementation project(':xhttp2-lib')
     // Gson
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'org.conscrypt:conscrypt-android:2.5.1'
 
     // Glide
     //noinspection GradleDependency

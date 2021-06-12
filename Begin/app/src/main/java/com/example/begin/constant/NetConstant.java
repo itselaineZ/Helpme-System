@@ -1,7 +1,7 @@
 package com.example.begin.constant;
 
 public class NetConstant {
-    public static final String baseService = "http://106.14.124.235:8080";
+    public static final String baseService = "http://101.132.124.114:8080";
 
     private static final String userURL = "/user";
 
@@ -24,17 +24,19 @@ public class NetConstant {
 
     private static final String InformListURL       = "/message";
 
-    private static final String RecievedTaskURL     = "/task/myReceive";
+    private static final String RecievedTaskURL     = "/task/list/receive";
 
     private static final String TaskDetailURL       = "/task/receive";
 
-    private static final String PublishedTaskURL    = "/task/myPublish";
+    private static final String PublishedTaskURL    = "/task/list/publish";
 
-    private static final String FinishByReceiverURL    ="/task/finishByReceiver";
+    private static final String FinishByReceiverURL = "/task/finish/receiver";
 
-    private static final String FinishByPublisherURL   ="/task/finishByPublisher";
+    private static final String FinishByPublisherURL= "/task/finish/publisher";
 
-    private static final String GiveUpURL              ="/task/halt";
+    private static final String PublisherGiveUpURL  = "/task/halt/publisher";
+
+    private static final String ReceiverGiveUpURL   = "/task/halt/receiver";
 
     public static String getLoginURL() {
         return baseService + userURL +loginURL;
@@ -76,5 +78,7 @@ public class NetConstant {
 
     public static String getFinishByReceiverURL(){return baseService + FinishByReceiverURL;}
 
-    public static String getGiveUpURL(){return baseService + GiveUpURL;}
+    public static String getPublisherGiveUpURL(){return baseService + PublisherGiveUpURL;}
+
+    public static String getReceiverGiveUpURL(){return baseService + ReceiverGiveUpURL;}
 }
