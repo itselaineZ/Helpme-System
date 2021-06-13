@@ -6,7 +6,7 @@ public class Filesource implements Serializable{
     private long id;
     private String courseMaterialName;
     private double score;
-    private int downloads;
+    private long downloads;
 
     public long getId(){return id;}
 
@@ -20,7 +20,7 @@ public class Filesource implements Serializable{
 
     public void setScore(double score){this.score = score;}
 
-    public int getDownloads(){return downloads;}
+    public long getDownloads(){return downloads;}
 
-    public void setDownloads(int downloads){this.downloads = downloads;}
+    public void setDownloads(long downloads){this.downloads = downloads;}
 }

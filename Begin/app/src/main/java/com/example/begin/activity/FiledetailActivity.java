@@ -37,6 +37,7 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
     private RadioButton mRbFiledetailActivityFive;
     private RadioGroup mRgFiledetailActivity;
     private String fileName;
+    private long id;
     private final String TAG = "FiledetailActivity";
 
     @Override
@@ -46,24 +47,9 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
 
         Bundle bundle = this.getIntent().getExtras();
         fileName = bundle.getString("fileName");
+        id = bundle.getLong("id");
 
         initView();
-
-        mBtFiledetailActivityDownload.setOnClickListener(v->
-        {
-            String [] permissions = new String[]{
-                    "android.permission.WRITE_EXTERNAL_STORAGE"
-            };//所需权限
-            if(ActivityCompat.checkSelfPermission(this,permissions[0]) != PackageManager.PERMISSION_GRANTED)
-            //如果没有权限
-                ActivityCompat.requestPermissions(this,permissions,1);//申请权限
-
-            File file = downloadFile(fileName);
-            if(file == null)
-                showMessage("文件不存在");
-            else
-                showMessage("文件下载成功");
-        });
     }
 
     private void initView(){
@@ -80,9 +66,24 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
 
         mTvFiledetailActivityFileName.setText(fileName);
 
-        mBtFiledetailActivityDownload.setOnClickListener(this);
         mBtFiledetailActivityEvaluate.setOnClickListener(this);
         mIvFiledetailActivityBack.setOnClickListener(this);
+
+        mBtFiledetailActivityDownload.setOnClickListener(v->
+        {
+            String [] permissions = new String[]{
+                    "android.permission.WRITE_EXTERNAL_STORAGE"
+            };//所需权限
+            if(ActivityCompat.checkSelfPermission(this,permissions[0]) != PackageManager.PERMISSION_GRANTED)
+                //如果没有权限
+                ActivityCompat.requestPermissions(this,permissions,1);//申请权限
+
+            File file = downloadFile(fileName);
+            if(file == null)
+                showMessage("文件不存在");
+            else
+                showMessage("文件下载成功");
+        });
     }
 
     public void onClick(View view){
@@ -93,18 +94,13 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
                 for(int i = 0 ;i < count;i++){
                     RadioButton rb = (RadioButton)mRgFiledetailActivity.getChildAt(i);
                     if(rb.isChecked()){
-                        Toast.makeText(FiledetailActivity.this, "选中"+rb.getTag().toString(), Toast.LENGTH_SHORT).show();
-                        score = i;
+                        //Toast.makeText(FiledetailActivity.this, "选中"+rb.getTag().toString(), Toast.LENGTH_SHORT).show();
+                        score = i+1;
                         break;
                     }
                 }
                 mBtFiledetailActivityEvaluate.setEnabled(false);
                 asyncEvaluate(String.valueOf(score));
-            case R.id.bt_filedetailactivity_download:
-                //下载
-                //startActivity(new Intent(this, ));
-                finish();
-                break;
             case R.id.iv_filedetailactivity_back:
                 startActivity(new Intent(this, CourselistActivity.class));
                 finish();
@@ -128,11 +124,12 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
                 OkHttpClient okHttpClient = new OkHttpClient();
                 // 2、构建请求体requestBody
                 RequestBody requestBody = new FormBody.Builder()
+                        .add("id", String.valueOf(id))
                         .add("score", score)
                         .build();
                 // 3、发送请求，因为要传密码，所以用POST方式
                 Request request = new Request.Builder()
-                        .url(NetConstant.getLoginURL())
+                        .url(NetConstant.getScoreURL())
                         .addHeader("Authorization", token)
                         .post(requestBody)
                         .build();
@@ -201,14 +198,18 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
         if(filename == null || filename.isEmpty())
             return null;
         RequestBody body = new MultipartBody.Builder()
-                .addFormDataPart("courseMaterialName",filename)
+                .addFormDataPart("id", String.valueOf(id))
                 .build();
+
+        sp = getSharedPreferences("login_info" ,MODE_PRIVATE);
+        String token = sp.getString("token", "ERROR");
 
         FutureTask<File> task = new FutureTask<>(()->
         {
             String URL = NetConstant.getDownloadURL();
             ResponseBody responseBody = okhttp.newCall(
                     new Request.Builder()
+                            .addHeader("Authorization", token)
                             .post(body)
                             .url(URL)
                             .build()

@@ -61,7 +61,8 @@ public class FileSearchAdapter extends RecyclerView.Adapter<FileSearchAdapter.My
 
         String filename = file.getCourseMaterialName();
         double filescore = file.getScore();
-        int filedownloads = file.getDownloads();
+        long filedownloads = file.getDownloads();
+        long fileid = file.getId();
         // 设置 课程名
         holder.mTvFilename.setText(filename);
         holder.mTvFilescore.setText(String.valueOf(filescore));//转成字符串才能放进TextView
@@ -73,6 +74,7 @@ public class FileSearchAdapter extends RecyclerView.Adapter<FileSearchAdapter.My
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("fileName", filename);
+                bundle.putLong("id", fileid);
                 Intent intent = new Intent(v.getContext(), FiledetailActivity.class);
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);

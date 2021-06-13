@@ -37,6 +37,6 @@
             android:id="@+id/et_fileaddactivity_filename"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="124dp"
-            app:layout_constraintHorizontal_bias="0.497" android:hint="请输入文件名" android:textColor="#FFFFFF"
+            app:layout_constraintHorizontal_bias="0.497" android:hint="请输入文件名.格式" android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

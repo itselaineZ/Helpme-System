@@ -16,7 +16,9 @@ public class NetConstant {
 
     private static final String FileAddURL          ="/course/material/add";
 
-    private static final String DownloadURL         = "/download";
+    private static final String DownloadURL         = "/course/material/download";
+
+    private static final String ScoreURL            = "/course/material/score";
 
     private static final String TaskListURL         = "/task/list";
 
@@ -61,6 +63,8 @@ public class NetConstant {
     public static String getDownloadURL() {
         return baseService + DownloadURL;
     }
+
+    public static String getScoreURL(){return baseService + ScoreURL;}
 
     public static String getTaskListURL(){return baseService + TaskListURL;}
 

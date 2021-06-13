@@ -63,7 +63,7 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
         });
         mBtFileaddActivityUpload.setOnClickListener(v->
         {
-            showMessage(uploadFile(path,mEtFileaddActivityFilename.getText().toString()) ? "上传成功" : "上传失败");
+            uploadFile(path,mEtFileaddActivityFilename.getText().toString());
         });
 
     }
@@ -94,43 +94,82 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    public boolean uploadFile(String path,String filename) {
-        OkHttpClient okhttp = new OkHttpClient();
+    public void uploadFile(String path, String filename) {
         File file = new File(path);
-        if(path.isEmpty() || !file.exists())
-            return false;
-        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("courseMaterial",filename,RequestBody.create(file, MediaType.parse("multipart/form-data")))
-                //.addFormDataPart("courseMaterial",filename,RequestBody.create(MEDIA_OBJECT_STREAM, file))
-                .addFormDataPart("courseMaterialName",filename)
-                .addFormDataPart("courseName", courseName)
-                .build();
-
-        sp = getSharedPreferences("login_info", MODE_PRIVATE);
-        final String token = sp.getString("token", "ERROR");
-
-        Request request = new Request.Builder()
-                .url(NetConstant.getFileAddURL())
-                .addHeader("Authorization", token)
-                .post(body)
-                .build();
-
-            try
-            {
-                ResponseBody responseBody = okhttp.newCall(request).execute().body();
-
-                String jsonStr = responseBody.string();
-                JsonObject jsonObject = (JsonObject) new JsonParser().parse(jsonStr);
-                String status = jsonObject.get("status").getAsString();
-                if(status.equals("success"))
-                    return true;
-                else return false;
-            }
-            catch (IOException e)
-            {
-                return false;
-            }
+        if(path.isEmpty() || !file.exists()){
+            showToastInThread(FileaddActivity.this, "获取文件失败，请检查文件路径是否存在");
+            return ;
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // okhttp异步POST请求； 总共5步
+                // 1、初始化okhttpClient对象
+                OkHttpClient okHttpClient = new OkHttpClient();
+                // 2、构建请求体requestBody
+                RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                        .addFormDataPart("courseMaterial",filename,RequestBody.create(file, MediaType.parse("multipart/form-data")))
+                        //.addFormDataPart("courseMaterial",filename,RequestBody.create(MEDIA_OBJECT_STREAM, file))
+                        .addFormDataPart("courseMaterialName",filename)
+                        .addFormDataPart("courseName", courseName)
+                        .build();
+                // 3、发送请求，因为要传密码，所以用POST方式
+                sp = getSharedPreferences("login_info", MODE_PRIVATE);
+                String token = sp.getString("token", "ERROR");
+                Request request = new Request.Builder()
+                        .url(NetConstant.getFileAddURL())
+                        .addHeader("Authorization", token)
+                        .post(body)
+                        .build();
+                // 4、使用okhttpClient对象获取请求的回调方法，enqueue()方法代表异步执行
+                okHttpClient.newCall(request).enqueue(new Callback() {
+                    // 5、重写两个回调方法
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        Log.d(TAG, "请求URL失败： " + e.getMessage());
+                        showToastInThread(FileaddActivity.this, "请求URL失败, 请重试！");
+                    }
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        // 先判断一下服务器是否异常
+                        String responseStr = response.toString();
+                        if (responseStr.contains("200")) {
+                            /*
+                           注意这里，同一个方法内
+                           response.body().string()只能调用一次，多次调用会报错
+                            */
+                            /* 使用Gson解析response的JSON数据的第一步 */
+                            String responseBodyStr = response.body().string();
+                            /* 使用Gson解析response的JSON数据的第二步 */
+                            JsonObject responseBodyJSONObject = (JsonObject) new JsonParser().parse(responseBodyStr);
+                            if (getStatus(responseBodyJSONObject).equals("success")) {
+                                Intent intent = new Intent(FileaddActivity.this, FileActivity.class);
+                                intent.putExtra("courseName", courseName);
+                                startActivity(intent);
+                                // 登录成功后，登录界面就没必要占据资源了
+                                finish();
+                            } else {
+                                Log.d(TAG, "上传失败");
+                                showToastInThread(FileaddActivity.this, "上传失败");
+                            }
+                        } else {
+                            Log.d(TAG, "服务器异常");
+                            showToastInThread(FileaddActivity.this, responseStr);
+                        }
+                    }
+                });
+            }
+        }).start();
+    }
+    private String getStatus(JsonObject responseBodyJSONObject) {
+        String status = responseBodyJSONObject.get("status").getAsString();
+        return status;
+    }
+
+    private final String getToken(JsonObject responseBodyJSONObject) {
+        String token = responseBodyJSONObject.get("token").getAsString();
+        return token;
+    }
 
 
     public void showMessage(String message)
