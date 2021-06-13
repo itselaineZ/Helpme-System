@@ -49,15 +49,17 @@
             android:layout_height="20dp" android:id="@+id/tv_filescore"
             android:textColor="#FFA69E"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.936" app:layout_constraintVertical_bias="0.25"
-            tools:text="TextView" android:background="#00FFFFFF" android:textStyle="bold"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.266"
+            tools:text="TextView" android:background="#00FFFFFF" android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_score" app:layout_constraintHorizontal_bias="0.238"/>
     <TextView
             android:layout_width="52dp"
             android:layout_height="21dp" android:id="@+id/tv_filedownloads"
             android:textColor="#FFE74C"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.994" app:layout_constraintVertical_bias="0.745"
-            tools:text="TextView" android:background="#00FFFFFF" android:textStyle="bold"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.779"
+            tools:text="TextView" android:background="#00FFFFFF" android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_downloads" app:layout_constraintHorizontal_bias="0.0"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,6 +21,8 @@ import java.io.InputStream;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
+import static com.example.begin.activity.FileActivity.courseName;
+
 public class FiledetailActivity extends BaseActivity implements View.OnClickListener{
 
     SharedPreferences sp;
@@ -102,7 +104,10 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
                 mBtFiledetailActivityEvaluate.setEnabled(false);
                 asyncEvaluate(String.valueOf(score));
             case R.id.iv_filedetailactivity_back:
-                startActivity(new Intent(this, CourselistActivity.class));
+                Intent intent = new Intent(this, FileActivity.class);
+                intent.putExtra("courseName", courseName);
+                startActivity(intent);
+
                 finish();
                 break;
         }
@@ -159,6 +164,7 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
                             if (getStatus(responseBodyJSONObject).equals("success")) {
                                 Log.d(TAG, "评价成功");
                                 showToastInThread(FiledetailActivity.this, "评价成功，感谢您");
+                                return ;
                             } else {
                                 getResponseErrMsg(FiledetailActivity.this, responseBodyJSONObject);
                                 Log.d(TAG, "返回状态不是success");
