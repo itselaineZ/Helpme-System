@@ -50,8 +50,7 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.bt_courseaddactivity_addbt:
                 String coursename = mEtCourseaddActivityCoursename.getText().toString().trim();
-                String coursrid = mEtCourseaddActivityCourseID.getText().toString().trim();
-                asyncCourse(coursename, coursrid);
+                asyncCourse(coursename);
                 break;
             case R.id.iv_courseaddactivity_back:
                 startActivity(new Intent(this, CourselistActivity.class));
@@ -60,7 +59,7 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    private void asyncCourse(final String courseName, final String courseID) {
+    private void asyncCourse(final String courseName) {
         /*
          发送请求属于耗时操作，所以开辟子线程执行
          上面的参数都加上了final，否则无法传递到子线程中
