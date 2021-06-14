@@ -99,13 +99,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             case R.id.bt_loginactivity_login:
                 String name = mEtLoginactivityUsername.getText().toString().trim();
-                String password = mEtLoginactivityPassword.getText().toString().trim();
+                String password = ValidUtils.encodeByMd5(mEtLoginactivityPassword.getText().toString().trim());
                 String inputcode = mEtLoginactivityInputcodes.getText().toString().toLowerCase();
                 if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password))
                     Toast.makeText(this, "请输入你的用户名或密码", Toast.LENGTH_SHORT).show();
                 else if (inputcode.equals(realCode) == false)
                     Toast.makeText(this, "验证码错误，请重新输入", Toast.LENGTH_SHORT).show();
-                else if (!(ValidUtils.isEmailValid(name) && ValidUtils.isPasswordValid(password))) {
+                else if (!ValidUtils.isEmailValid(name)) {
                     Toast.makeText(this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -180,7 +180,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                 editor = sp.edit();
                                 editor.putString("token", token);
                                 editor.putString("email", email);
-                                editor.putString("password", password);
                                 editor.putString("username", username);
                                 if (editor.commit()) {
                                     Intent it_login_to_main = new Intent(LoginActivity.this, CourselistActivity.class);
@@ -191,7 +190,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     showToastInThread(LoginActivity.this, "token保存失败，请重新登录");
                                 }
                             } else {
-                                //getResponseErrMsg(LoginActivity.this, responseBodyJSONObject);
                                 Log.d(TAG, "账号或密码验证失败");
                                 showToastInThread(LoginActivity.this, "帐号或密码验证失败");
                             }
@@ -223,17 +221,4 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         return token;
     }
 
-    /*
-      使用Gson解析response返回异常信息的JSON中的data对象
-      这也属于第三步，一、二步在方法调用之前执行了
-     */
-    private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
-        /*
-        JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
-        String errorCode = dataObject.get("errorCode").getAsString();
-        String errorMsg = dataObject.get("errorMsg").getAsString();
-        Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
-        // 在子线程中显示Toast
-        showToastInThread(context, errorMsg);*/
-    }
 }

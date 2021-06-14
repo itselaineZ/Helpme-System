@@ -31,11 +31,24 @@ public class ValidUtils {
      *
      * @return 加密后字符串
      */
-    public static String encodeByMd5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
-        // 注意这里是 Base64.NO_WRAP，不能用 Base64.DEFAULT，否则结尾会带一个 \n
-        String newstr = new String(Base64.encode(md5.digest(str.getBytes("utf-8")), Base64.NO_WRAP));
-        return newstr;
+    public static String encodeByMd5(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            byte[] bytes = digest.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : bytes) {
+                int c = b & 0xff; //负数转换成正数
+                String result = Integer.toHexString(c); //把十进制的数转换成十六进制的书
+                if(result.length()<2){
+                    sb.append(0); //让十六进制全部都是两位数
+                }
+                sb.append(result);
+            }
+            return sb.toString(); //返回加密后的密文
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "";
+        }
     }
 }
 

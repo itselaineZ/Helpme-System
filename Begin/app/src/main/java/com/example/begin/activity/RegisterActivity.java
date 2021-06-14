@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.begin.constant.NetConstant;
+import com.example.begin.util.ValidUtils;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -103,16 +104,18 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     Toast.makeText(this, "两次输入的密码不一致，注册失败", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                String password = password1;
+                String password = ValidUtils.encodeByMd5(password1);
+                //String password = password1;
                 String inputcode = mEtRegisteractivityInputcodes.getText().toString().toLowerCase();
                 //注册验证
                 if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(inputcode) ) {
-                    if (inputcode.equals(realCode)) {
+                    if(!ValidUtils.isEmailValid(email))
+                        Toast.makeText(this, "邮箱格式错误", Toast.LENGTH_SHORT).show();
+                    else if (inputcode.equals(realCode))
                         //将用户名和密码加入到数据库中
                         asyncRegister(username, email, password);
-                    } else {
+                    else
                         Toast.makeText(this, "验证码错误,注册失败", Toast.LENGTH_SHORT).show();
-                    }
                 }else {
                     Toast.makeText(this, "未完善信息，注册失败", Toast.LENGTH_SHORT).show();
                 }

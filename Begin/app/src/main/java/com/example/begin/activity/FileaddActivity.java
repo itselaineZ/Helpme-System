@@ -100,8 +100,8 @@ public class FileaddActivity extends BaseActivity implements View.OnClickListene
             showToastInThread(FileaddActivity.this, "获取文件失败，请检查文件路径是否存在");
             return ;
         }
-        if(file.length() > 1048576){
-            showToastInThread(FileaddActivity.this, "上传文件不得大于1MB");
+        if(file.length() > 52428800){
+            showToastInThread(FileaddActivity.this, "上传文件不得大于50MB");
             return ;
         }
         new Thread(new Runnable() {
