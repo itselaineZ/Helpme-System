@@ -114,7 +114,6 @@ public class RecievedetailActivity extends BaseActivity implements View.OnClickL
                                 startActivity(new Intent(RecievedetailActivity.this, RecievedtaskActivity.class));
                                 finish();
                             } else {
-                                getResponseErrMsg(RecievedetailActivity.this, responseBodyJSONObject);
                                 Log.d(TAG, "操作失败");
                                 showToastInThread(RecievedetailActivity.this, "操作失败");
                             }
@@ -132,15 +131,6 @@ public class RecievedetailActivity extends BaseActivity implements View.OnClickL
     private String getStatus(JsonObject responseBodyJSONObject) {
         String status = responseBodyJSONObject.get("status").getAsString();
         return status;
-    }
-
-    private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
-        JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
-        String errorCode = dataObject.get("errorCode").getAsString();
-        String errorMsg = dataObject.get("errorMsg").getAsString();
-        Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
-        // 在子线程中显示Toast
-        showToastInThread(context, errorMsg);
     }
 
 }

@@ -187,7 +187,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                     }
                                 } else {
                                     Log.d(TAG, "用户存在");
-                                    getResponseErrMsg(RegisterActivity.this, responseBodyJSONObject);
                                     showToastInThread(RegisterActivity.this, "注册失败，用户已存在");
                                 }
                             } else {
@@ -222,15 +221,5 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         return token;
     }
 
-    // 获取验证码响应data
-    // 使用Gson解析response返回异常信息的JSON中的data对象
-    private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
-//        JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
-//        String errorCode = dataObject.get("errorCode").getAsString();
-//        String errorMsg = dataObject.get("errorMsg").getAsString();
-//        Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
-//        // 在子线程中显示Toast
-//        showToastInThread(context, errorMsg);
-    }
 }
 

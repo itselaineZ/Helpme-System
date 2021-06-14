@@ -166,7 +166,6 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
                                 showToastInThread(FiledetailActivity.this, "评价成功，感谢您");
                                 return ;
                             } else {
-                                getResponseErrMsg(FiledetailActivity.this, responseBodyJSONObject);
                                 Log.d(TAG, "返回状态不是success");
                                 showToastInThread(FiledetailActivity.this, "评价失败，请检查服务器");
                             }
@@ -188,14 +187,6 @@ public class FiledetailActivity extends BaseActivity implements View.OnClickList
         // 登录成功返回的json为{ "status":"success", "data":null }
         // 只获取status即可，data为null
         return status;
-    }
-    private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
-        JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
-        String errorCode = dataObject.get("errorCode").getAsString();
-        String errorMsg = dataObject.get("errorMsg").getAsString();
-        Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
-        // 在子线程中显示Toast
-        showToastInThread(context, errorMsg);
     }
 
     public File downloadFile(String filename)

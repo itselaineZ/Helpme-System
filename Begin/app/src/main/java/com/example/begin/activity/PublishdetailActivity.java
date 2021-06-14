@@ -113,9 +113,8 @@ public class PublishdetailActivity extends BaseActivity implements View.OnClickL
                                 startActivity(new Intent(PublishdetailActivity.this, PublishedtaskActivity.class));
                                 finish();
                             } else {
-                                getResponseErrMsg(PublishdetailActivity.this, responseBodyJSONObject);
-                                Log.d(TAG, "完成任务失败");
-                                showToastInThread(PublishdetailActivity.this, "完成任务失败");
+                                Log.d(TAG, "操作失败");
+                                showToastInThread(PublishdetailActivity.this, "操作失败");
                             }
                         } else {
                             Log.d(TAG, "服务器异常");
@@ -131,15 +130,6 @@ public class PublishdetailActivity extends BaseActivity implements View.OnClickL
     private String getStatus(JsonObject responseBodyJSONObject) {
         String status = responseBodyJSONObject.get("status").getAsString();
         return status;
-    }
-
-    private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
-        JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
-        String errorCode = dataObject.get("errorCode").getAsString();
-        String errorMsg = dataObject.get("errorMsg").getAsString();
-        Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
-        // 在子线程中显示Toast
-        showToastInThread(context, errorMsg);
     }
 
 }

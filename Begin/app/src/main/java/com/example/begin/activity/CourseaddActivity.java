@@ -139,17 +139,4 @@ public class CourseaddActivity extends BaseActivity implements View.OnClickListe
         return status;
     }
 
-    /*
-      使用Gson解析response返回异常信息的JSON中的data对象
-      这也属于第三步，一、二步在方法调用之前执行了
-     */
-    private void getResponseErrMsg(Context context, JsonObject responseBodyJSONObject) {
-        JsonObject dataObject = responseBodyJSONObject.get("data").getAsJsonObject();
-        String errorCode = dataObject.get("errorCode").getAsString();
-        String errorMsg = dataObject.get("errorMsg").getAsString();
-        Log.d(TAG, "errorCode: " + errorCode + " errorMsg: " + errorMsg);
-        // 在子线程中显示Toast
-        showToastInThread(context, errorMsg);
-    }
-
 }
