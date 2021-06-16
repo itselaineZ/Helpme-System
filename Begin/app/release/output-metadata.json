@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "cn.edu.heuet.login",
+  "applicationId": "com.helpMeSystem",
   "variantName": "processReleaseResources",
   "elements": [
     {

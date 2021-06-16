@@ -58,11 +58,12 @@ public class NetConstant {
         return baseService + FileListURL;
     }
 
-    public static String getFileAddURL(){return baseService + FileAddURL;}
-
-    public static String getDownloadURL() {
-        return baseService + DownloadURL;
+    public static String getFileAddURL(){
+        return baseService + FileAddURL;
+        //return "http://106.14.124.235:3000/mock/9/course/material/add";
     }
+
+    public static String getDownloadURL() { return baseService + DownloadURL; }
 
     public static String getScoreURL(){return baseService + ScoreURL;}
 
